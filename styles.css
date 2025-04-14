@@ -264,6 +264,38 @@ h1, h2, h3, h4, h5, h6 {
     .container {
         padding: 5rem 1rem 1rem;
     }
+
+    .whisper i {
+        font-size: 2.5em; /* アイコンサイズを縮小 */
+    }
+
+    .whisper.top-left,
+    .whisper.top-right {
+        top: 20%;
+    }
+
+    .whisper.bottom-left,
+    .whisper.bottom-right {
+        bottom: 20%;
+    }
+
+    .whisper.top-left,
+    .whisper.bottom-left {
+        left: 5%;
+    }
+
+    .whisper.top-right,
+    .whisper.bottom-right {
+        right: 5%;
+    }
+
+    .whisper.middle-left {
+        left: 3%;
+    }
+
+    .whisper.middle-right {
+        right: 3%;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -283,5 +315,24 @@ h1, h2, h3, h4, h5, h6 {
         position: static;
         width: 100%;
         margin-top: 0.5rem;
+    }
+
+    .whisper i {
+        font-size: 2em; /* さらにアイコンサイズを縮小 */
+    }
+
+    .whisper.top-left,
+    .whisper.top-right {
+        top: 25%;
+    }
+
+    .whisper.bottom-left,
+    .whisper.bottom-right {
+        bottom: 25%;
+    }
+
+    .whisper.middle-left,
+    .whisper.middle-right {
+        display: none; /* 最小画面サイズでは中央の要素を非表示 */
     }
 }
