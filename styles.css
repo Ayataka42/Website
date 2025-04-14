@@ -327,21 +327,25 @@ h1, h2, h3, h4, h5, h6 {
 
     .dropdown-content {
         display: none;
-        position: absolute;
+        position: fixed;  /* absolute から fixed に変更 */
         background-color: var(--primary);
         min-width: 200px;
         border-radius: 8px;
         padding: 0.8rem 0;
         box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         border: 1px solid rgba(249, 238, 220, 0.15);
-        top: 120%;
+        top: auto;  /* auto に変更 */
         left: 50%;
         transform: translateX(-50%);
         z-index: 1001;
+        -webkit-transform: translateX(-50%);  /* Safari用 */
+        -webkit-backface-visibility: hidden;  /* Safari用 */
+        -webkit-tap-highlight-color: transparent;  /* タップ時のハイライトを無効化 */
     }
 
     .dropdown-content.show {
         display: block;
+        -webkit-animation: fadeIn 0.3s ease;  /* Safari用 */
         animation: fadeIn 0.3s ease;
     }
 
@@ -352,10 +356,7 @@ h1, h2, h3, h4, h5, h6 {
         display: block;
         transition: all 0.3s ease;
         font-size: 1.1rem;
-    }
-
-    .dropdown-content a:active {
-        background-color: var(--accent);
+        -webkit-tap-highlight-color: transparent;  /* タップ時のハイライトを無効化 */
     }
 
     @keyframes fadeIn {
@@ -366,6 +367,18 @@ h1, h2, h3, h4, h5, h6 {
         to {
             opacity: 1;
             transform: translateY(0) translateX(-50%);
+        }
+    }
+
+    /* Safari用のアニメーション */
+    @-webkit-keyframes fadeIn {
+        from {
+            opacity: 0;
+            -webkit-transform: translateY(-10px) translateX(-50%);
+        }
+        to {
+            opacity: 1;
+            -webkit-transform: translateY(0) translateX(-50%);
         }
     }
 
@@ -415,17 +428,21 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .dropdown-content {
-        position: absolute;  /* ドロップダウンメニューを絶対位置に戻す */
+        position: fixed;  /* absolute から fixed に変更 */
         width: 180px;
         min-width: unset;
         margin-top: 0.5rem;
         left: 50%;
         transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);  /* Safari用 */
+        -webkit-backface-visibility: hidden;  /* Safari用 */
+        -webkit-tap-highlight-color: transparent;  /* タップ時のハイライトを無効化 */
     }
 
     .dropdown-content a {
         padding: 0.7rem 1.2rem;
         font-size: 1rem;
+        -webkit-tap-highlight-color: transparent;  /* タップ時のハイライトを無効化 */
     }
 
     .container {

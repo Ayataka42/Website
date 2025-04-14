@@ -177,59 +177,55 @@
             const dropdown = document.querySelector('.dropdown');
             const dropdownContent = document.querySelector('.dropdown-content');
             const dropdownLink = dropdown.querySelector('.nav-link');
-            let touchStartY = 0;
 
-            // タップとスワイプの処理
+            // タップイベントの処理（iOSでの動作を改善）
             dropdownLink.addEventListener('touchstart', (e) => {
-                touchStartY = e.touches[0].clientY;
-            });
-
-            dropdownLink.addEventListener('touchend', (e) => {
                 e.preventDefault();
-                const touchEndY = e.changedTouches[0].clientY;
-                const touchDiff = touchEndY - touchStartY;
-
-                // スワイプではなくタップの場合のみトグル
-                if (Math.abs(touchDiff) < 5) {
-                    dropdownContent.classList.toggle('show');
-                    e.stopPropagation();
-                }
-            });
+                e.stopPropagation();
+                dropdownContent.classList.toggle('show');
+            }, { passive: false });
 
             // 画面の他の場所をタップした時にドロップダウンを閉じる
             document.addEventListener('touchstart', (e) => {
                 if (!dropdown.contains(e.target)) {
                     dropdownContent.classList.remove('show');
                 }
-            });
+            }, { passive: true });
 
             // スクロール時にドロップダウンを閉じる
             document.addEventListener('scroll', () => {
                 dropdownContent.classList.remove('show');
+            }, { passive: true });
+
+            // クリックイベントのフォールバック
+            dropdownLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                dropdownContent.classList.toggle('show');
             });
-        });
 
-        const modal = document.getElementById('modal');
-        const modalImg = document.getElementById('modal-img');
-        const close = document.getElementsByClassName('close')[0];
-        const photos = document.querySelectorAll('.photo-item img');
+            const modal = document.getElementById('modal');
+            const modalImg = document.getElementById('modal-img');
+            const close = document.getElementsByClassName('close')[0];
+            const photos = document.querySelectorAll('.photo-item img');
 
-        photos.forEach(photo => {
-            photo.onclick = function() {
-                modal.style.display = 'block';
-                modalImg.src = this.src;
-            }
-        });
+            photos.forEach(photo => {
+                photo.onclick = function() {
+                    modal.style.display = 'block';
+                    modalImg.src = this.src;
+                }
+            });
 
-        close.onclick = function() {
-            modal.style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
+            close.onclick = function() {
                 modal.style.display = 'none';
             }
-        }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            }
+        });
     </script>
 </body>
 </html>
