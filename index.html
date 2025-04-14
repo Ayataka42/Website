@@ -185,18 +185,36 @@
         document.addEventListener('DOMContentLoaded', () => {
             const dropdown = document.querySelector('.dropdown');
             const dropdownContent = document.querySelector('.dropdown-content');
+            const dropdownLink = dropdown.querySelector('.nav-link');
+            let touchStartY = 0;
 
-            // Handle click or touch events for mobile
-            dropdown.addEventListener('click', (event) => {
-                event.preventDefault(); // Prevent default link behavior
-                dropdownContent.classList.toggle('show');
+            // タップとスワイプの処理
+            dropdownLink.addEventListener('touchstart', (e) => {
+                touchStartY = e.touches[0].clientY;
             });
 
-            // Close dropdown if clicked outside
-            document.addEventListener('click', (event) => {
-                if (!dropdown.contains(event.target)) {
+            dropdownLink.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                const touchEndY = e.changedTouches[0].clientY;
+                const touchDiff = touchEndY - touchStartY;
+
+                // スワイプではなくタップの場合のみトグル
+                if (Math.abs(touchDiff) < 5) {
+                    dropdownContent.classList.toggle('show');
+                    e.stopPropagation();
+                }
+            });
+
+            // 画面の他の場所をタップした時にドロップダウンを閉じる
+            document.addEventListener('touchstart', (e) => {
+                if (!dropdown.contains(e.target)) {
                     dropdownContent.classList.remove('show');
                 }
+            });
+
+            // スクロール時にドロップダウンを閉じる
+            document.addEventListener('scroll', () => {
+                dropdownContent.classList.remove('show');
             });
         });
     </script>
