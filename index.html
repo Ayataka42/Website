@@ -80,7 +80,34 @@
             }
 
             .whisper {
-                display: none;
+                display: block;  /* whispersを表示 */
+                transform: scale(0.7);  /* サイズを少し小さく */
+            }
+
+            .whisper.middle-left,
+            .whisper.middle-right {
+                display: none;  /* 中央のwhispersは非表示のまま */
+            }
+
+            /* モバイル用の位置調整 */
+            .whisper.top-left {
+                top: 20%;
+                left: 5%;
+            }
+
+            .whisper.top-right {
+                top: 20%;
+                right: 5%;
+            }
+
+            .whisper.bottom-left {
+                bottom: 10%;
+                left: 5%;
+            }
+
+            .whisper.bottom-right {
+                bottom: 10%;
+                right: 5%;
             }
         }
 
@@ -95,6 +122,31 @@
 
             .subtitle, .description {
                 font-size: 1rem;
+            }
+
+            .whisper {
+                transform: scale(0.5);  /* さらに小さく */
+            }
+
+            /* より小さい画面用の位置調整 */
+            .whisper.top-left {
+                top: 15%;
+                left: 2%;
+            }
+
+            .whisper.top-right {
+                top: 15%;
+                right: 2%;
+            }
+
+            .whisper.bottom-left {
+                bottom: 8%;
+                left: 2%;
+            }
+
+            .whisper.bottom-right {
+                bottom: 8%;
+                right: 2%;
             }
         }
     </style>
