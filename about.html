@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Nareshatama Nainggolan</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .intro {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2em;
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--accent);
+        }
+
+        .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background-color: rgba(73, 106, 129, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(249, 238, 220, 0.1);
+            text-align: left;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            border-bottom: 2px solid rgba(249, 238, 220, 0.2);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.3em;
+            margin: 1.5rem 0 1rem;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin: 0 0 1rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .skill-item {
+            background-color: rgba(216, 71, 39, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            border: 1px solid rgba(216, 71, 39, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .skill-item:hover {
+            background-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .achievement {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: rgba(249, 238, 220, 0.05);
+            border-radius: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        .achievement:hover {
+            transform: translateX(10px);
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        @media screen and (max-width: 768px) {
+            .section {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a href="main.html" class="nav-logo">NN</a>
+            <div class="nav-menu">
+                <a href="about.html" class="nav-link">About</a>
+                <div class="dropdown">
+                    <a href="#" class="nav-link">Work <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="photos.html">Photos</a>
+                        <a href="papers.html">Papers</a>
+                    </div>
+                </div>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="whisper top-left floating"><i class="fas fa-graduation-cap fa-3x"></i></div>
+        <div class="whisper top-right floating"><i class="fas fa-book fa-3x"></i></div>
+        <div class="whisper middle-left floating-reverse"><i class="fas fa-calculator fa-3x"></i></div>
+        <div class="whisper middle-right floating-reverse"><i class="fas fa-chess fa-3x"></i></div>
+        <div class="whisper bottom-left floating"><i class="fas fa-pencil-ruler fa-3x"></i></div>
+        <div class="whisper bottom-right floating"><i class="fas fa-trophy fa-3x"></i></div>
+
+        <div class="content-wrapper">
+            <h1>Nareshatama Nainggolan</h1>
+            <div class="intro">
+                IB Diploma Candidate at Inglemoor High School<br>
+                Class of 2026
+            </div>
+
+            <div class="section">
+                <h2>About Me</h2>
+                <p>
+                    I am a passionate student pursuing both academic challenges and creative endeavors. While maintaining a 4.0 GPA, I'm taking on the IB Diploma Programme while actively participating in Robotics Club and contributing to our nationally recognized yearbook.
+                </p>
+                <p>
+                    My interest in computer science extends beyond the classroom into practical applications, including game development in Unity and an upcoming project that aims to raise awareness about global warming through interactive game design.
+                </p>
+            </div>
+
+            <div class="section">
+                <h2>Academic Achievements</h2>
+                <div class="achievement">
+                    <span class="highlight">SAT Score:</span> 1520 (English: 730, Math: 790)
+                </div>
+                <div class="achievement">
+                    <span class="highlight">JLPT N1:</span> Perfect Score (180/180)
+                </div>
+                <div class="achievement">
+                    <span class="highlight">GPA:</span> 4.0
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Leadership & Activities</h2>
+                <h3>Robotics Club</h3>
+                <p>As a CAD team member, I collaborate on detailed 3D designs for our robot while managing our social media presence as the Media Manager.</p>
+
+                <h3>Math Club</h3>
+                <p>I participate in competitive math challenges while serving as an executive member, managing club operations and social media outreach.</p>
+
+                <h3>Yearbook Staff</h3>
+                <p>Contributing to our nationally recognized yearbook team, I handle various aspects from photography to layout design, ensuring we meet our publication deadlines.</p>
+            </div>
+
+            <div class="section">
+                <h2>Skills & Interests</h2>
+                <div class="skill-list">
+                    <div class="skill-item">Computer Science</div>
+                    <div class="skill-item">3D CAD Design</div>
+                    <div class="skill-item">Photography</div>
+                    <div class="skill-item">Japanese (Native)</div>
+                    <div class="skill-item">Game Development</div>
+                    <div class="skill-item">Project Management</div>
+                    <div class="skill-item">Creative Design</div>
+                    <div class="skill-item">Problem Solving</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

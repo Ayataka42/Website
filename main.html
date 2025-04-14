@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nareshatama Nainggolan</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a href="main.html" class="nav-logo">NN</a>
+            <div class="nav-menu">
+                <a href="about.html" class="nav-link">About</a>
+                <div class="dropdown">
+                    <a href="#" class="nav-link">Work <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="photos.html">Photos</a>
+                        <a href="papers.html">Papers</a>
+                    </div>
+                </div>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="whisper top-left floating"><i class="fas fa-camera fa-3x"></i></div>
+        <div class="whisper top-right floating"><i class="fas fa-robot fa-3x"></i></div>
+        <div class="whisper middle-left floating-reverse"><i class="fas fa-microchip fa-3x"></i></div>
+        <div class="whisper middle-right floating-reverse"><i class="fas fa-brain fa-3x"></i></div>
+        <div class="whisper bottom-left floating"><i class="fas fa-cog fa-3x"></i></div>
+        <div class="whisper bottom-right floating"><i class="fas fa-code fa-3x"></i></div>
+        
+        <div class="hero-section">
+            <p class="subtitle">Hi! I'm</p>
+            <h1 class="title">Nareshatama Nainggolan</h1>
+            <p class="description">I am a driven student who makes things - from robots to yearbooks</p>
+        </div>
+    </div>
+
+    <style>
+        .hero-section {
+            text-align: center;
+            padding: 12rem 0;
+        }
+
+        .subtitle {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .title {
+            font-size: 6rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.1;
+        }
+
+        .description {
+            font-size: 2rem;
+            color: var(--light);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
+
+        @media screen and (max-width: 768px) {
+            .hero-section {
+                padding: 6rem 0;
+            }
+
+            .title {
+                font-size: 3rem;
+            }
+
+            .subtitle, .description {
+                font-size: 1.2rem;
+            }
+
+            .whisper {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .hero-section {
+                padding: 4rem 0;
+            }
+
+            .title {
+                font-size: 2.5rem;
+            }
+
+            .subtitle, .description {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</body>
+</html>

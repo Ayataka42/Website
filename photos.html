@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography - Nareshatama Nainggolan</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .photo-grid {
+            column-count: 4;
+            column-gap: 20px;
+            padding: 20px;
+        }
+
+        .photo-item {
+            position: relative;
+            break-inside: avoid;
+            margin-bottom: 20px;
+            padding: 12px 12px 40px 12px;
+            background-color: var(--light);
+            border-radius: 3px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            background-color: rgba(43, 58, 103, 0.8);
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        @media screen and (max-width: 1200px) {
+            .photo-grid {
+                column-count: 3;
+            }
+        }
+
+        @media screen and (max-width: 900px) {
+            .photo-grid {
+                column-count: 2;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .photo-grid {
+                column-count: 1;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 4px;
+        }
+
+        .close {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            color: var(--light);
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            background-color: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        @media screen and (max-width: 768px) {
+            .close {
+                top: 10px;
+                right: 10px;
+                font-size: 30px;
+                width: 30px;
+                height: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a href="main.html" class="nav-logo">NN</a>
+            <div class="nav-menu">
+                <a href="about.html" class="nav-link">About</a>
+                <div class="dropdown">
+                    <a href="#" class="nav-link">Work <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="photos.html">Photos</a>
+                        <a href="papers.html">Papers</a>
+                    </div>
+                </div>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="whisper top-left floating"><i class="fas fa-camera-retro fa-3x"></i></div>
+        <div class="whisper top-right floating"><i class="fas fa-photo-film fa-3x"></i></div>
+        <div class="whisper middle-left floating-reverse"><i class="fas fa-images fa-3x"></i></div>
+        <div class="whisper middle-right floating-reverse"><i class="fas fa-palette fa-3x"></i></div>
+        <div class="whisper bottom-left floating"><i class="fas fa-eye fa-3x"></i></div>
+        <div class="whisper bottom-right floating"><i class="fas fa-film fa-3x"></i></div>
+
+        <div class="page-title">
+            <h1>Photography</h1>
+            <p>Capturing moments through my lens</p>
+        </div>
+
+        <div class="photo-grid">
+            <div class="photo-item"><img src="photo/NGN_0080.jpg" alt="Photo"></div>
+            <div class="photo-item"><img src="photo/NGN_5639.jpg" alt="Photo"></div>
+            <div class="photo-item"><img src="photo/NGN_5672.jpg" alt="Photo"></div>
+            <div class="photo-item"><img src="photo/NGN_5873.jpg" alt="Photo"></div>
+            <div class="photo-item"><img src="photo/NGN_6083.jpg" alt="Photo"></div>
+            <div class="photo-item"><img src="photo/NGN_6096.jpg" alt="Photo"></div>
+            <div class="photo-item"><img src="photo/NGN_6125.jpg" alt="Photo"></div>
+            <div class="photo-item"><img src="photo/NGN_6148.jpg" alt="Photo"></div>
+            <div class="photo-item"><img src="photo/NGN_6200.jpg" alt="Photo"></div>
+            <div class="photo-item"><img src="photo/NGN_6224.jpg" alt="Photo"></div>
+            <div class="photo-item"><img src="photo/NGN_6297.jpg" alt="Photo"></div>
+            <div class="photo-item"><img src="photo/NGN_6324.jpg" alt="Photo"></div>
+            <div class="photo-item"><img src="photo/NGN_6695.jpg" alt="Photo"></div>
+            <div class="photo-item"><img src="photo/NGN_6781.jpg" alt="Photo"></div>
+            <div class="photo-item"><img src="photo/NGN_7041.jpg" alt="Photo"></div>
+            <div class="photo-item"><img src="photo/NGN_7502.jpg" alt="Photo"></div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-img">
+    </div>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const modalImg = document.getElementById('modal-img');
+        const close = document.getElementsByClassName('close')[0];
+        const photos = document.querySelectorAll('.photo-item img');
+
+        photos.forEach(photo => {
+            photo.onclick = function() {
+                modal.style.display = 'block';
+                modalImg.src = this.src;
+            }
+        });
+
+        close.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
