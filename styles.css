@@ -448,6 +448,7 @@ h1, h2, h3, h4, h5, h6 {
         transform: translateX(-50%);
         -webkit-transform: translateX(-50%);  /* Safari用 */
         -webkit-backface-visibility: hidden;  /* Safari用 */
+        backface-visibility: hidden;          /* 標準プロパティ */
         -webkit-tap-highlight-color: transparent;  /* タップ時のハイライトを無効化 */
     }
 

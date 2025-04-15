@@ -11,88 +11,82 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            padding: 20px 40px;
-            margin: 0 auto;
-            max-width: 1200px;
+            padding: 20px;
         }
 
         .paper-item {
-            position: relative;
-            margin-bottom: 30px;
-            padding: 15px 15px 40px 15px;
-            background-color: var(--light);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            background-color: rgba(73, 106, 129, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(249, 238, 220, 0.1);
+            padding: 20px;
             cursor: pointer;
-            width: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .paper-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .paper-cover {
             width: 100%;
-            height: auto;
-            display: block;
-            object-fit: contain;
-            border-radius: 4px;
-            margin-bottom: 1rem;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
 
         .paper-title {
-            color: var(--primary);
-            font-size: 1.1rem;
-            margin-top: 15px;
-            text-align: center;
-            font-weight: 500;
+            color: var(--light);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .paper-description {
+            color: var(--light);
+            opacity: 0.8;
+            font-size: 0.9rem;
         }
 
         .modal {
             display: none;
             position: fixed;
-            top: 0;
+            z-index: 9999;
             left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
-            padding: 20px;
-            box-sizing: border-box;
+            background-color: rgba(0,0,0,0.9);
+            overflow: hidden;
         }
 
         .modal-content {
-            width: 100%;
-            height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 90%;
             border: none;
-            border-radius: 8px;
-            background: white;
+            background-color: white;
         }
 
         .close {
-            position: fixed;
+            position: absolute;
+            right: 20px;
             top: 20px;
-            right: 30px;
-            color: var(--light);
-            font-size: 40px;
+            color: #fff;
+            font-size: 30px;
             font-weight: bold;
             cursor: pointer;
-            z-index: 1001;
+            z-index: 10000;
+            background: rgba(0,0,0,0.5);
             width: 40px;
             height: 40px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .close:hover {
-            background-color: var(--accent);
-            transform: rotate(90deg);
         }
 
         @media screen and (max-width: 768px) {
@@ -107,11 +101,34 @@
             }
 
             .close {
-                top: 10px;
                 right: 10px;
-                font-size: 30px;
-                width: 30px;
-                height: 30px;
+                top: 10px;
+                font-size: 24px;
+                width: 36px;
+                height: 36px;
+            }
+
+            .modal {
+                padding: 10px;
+            }
+
+            .modal-content {
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                transform: none;
+            }
+
+            @supports (padding-top: env(safe-area-inset-top)) {
+                .modal-toolbar {
+                    padding-top: env(safe-area-inset-top);
+                    height: calc(44px + env(safe-area-inset-top));
+                }
+
+                .modal-content {
+                    padding-top: calc(44px + env(safe-area-inset-top));
+                }
             }
         }
 
@@ -153,56 +170,46 @@
         <div class="whisper bottom-right floating"><i class="fas fa-scroll fa-3x"></i></div>
 
         <div class="page-title">
-            <h1>Academic Papers</h1>
-            <p>Research and analytical writing</p>
+            <h1>Research Papers</h1>
+            <p>Academic works and research projects</p>
         </div>
 
         <div class="papers-grid">
             <div class="paper-item" data-pdf="paper/Investigating Optimal Distance to Minimize Lens Distortion.pdf">
-                <img class="paper-cover" src="paper/Math IA Cover Page.png" alt="Math IA">
-                <div class="paper-title">Investigating Optimal Distance to Minimize Lens Distortion</div>
+                <img src="paper/Math IA Cover Page.png" alt="Math IA Cover" class="paper-cover">
+                <h3 class="paper-title">Investigating Optimal Distance to Minimize Lens Distortion</h3>
+                <p class="paper-description">Mathematical Investigation on Camera Lens Distortion</p>
             </div>
+            
             <div class="paper-item" data-pdf="paper/Lamellophone Tuning.pdf">
-                <img class="paper-cover" src="paper/Lamellophone Cover Page.png" alt="Lamellophone Tuning">
-                <div class="paper-title">Lamellophone Tuning</div>
+                <img src="paper/Lamellophone Cover Page.png" alt="Lamellophone Cover" class="paper-cover">
+                <h3 class="paper-title">Lamellophone Tuning</h3>
+                <p class="paper-description">Research on Musical Instrument Tuning</p>
             </div>
         </div>
     </div>
 
-    <div id="modal" class="modal">
-        <span class="close">&times;</span>
-        <iframe class="modal-content" id="modal-pdf"></iframe>
-    </div>
-
-    <script>
-        const modal = document.getElementById('modal');
-        const modalPdf = document.getElementById('modal-pdf');
-        const close = document.getElementsByClassName('close')[0];
-        const papers = document.querySelectorAll('.paper-item');
-
-        papers.forEach(paper => {
-            paper.onclick = function() {
-                const pdfPath = this.getAttribute('data-pdf');
-                modal.style.display = 'block';
-                modalPdf.src = pdfPath;
-            }
-        });
-
-        close.onclick = function() {
-            modal.style.display = 'none';
-            modalPdf.src = '';
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
-                modalPdf.src = '';
-            }
-        }
-    </script>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const papers = document.querySelectorAll('.paper-item');
+
+            papers.forEach(paper => {
+                paper.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pdfPath = this.getAttribute('data-pdf');
+                    
+                    // モバイルデバイスの場合は新しいタブでPDFを開く
+                    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                        window.open(pdfPath, '_blank');
+                    } else {
+                        // デスクトップの場合はブラウザのPDFビューアーを使用
+                        const pdfUrl = window.location.origin + '/' + pdfPath;
+                        window.open(pdfUrl, '_blank', 'width=800,height=600');
+                    }
+                });
+            });
+
+            // ドロップダウンメニューの既存のコード
             const dropdown = document.querySelector('.dropdown');
             const dropdownContent = document.querySelector('.dropdown-content');
             const dropdownLink = dropdown.querySelector('.nav-link');
@@ -218,41 +225,29 @@
                 touchEndTime = new Date().getTime();
                 const touchDuration = touchEndTime - touchStartTime;
 
-                // 短いタップのみを処理（300ms以下）
                 if (touchDuration < 300) {
                     e.preventDefault();
                     e.stopPropagation();
                     
-                    // 表示状態を切り替え
                     if (dropdownContent.classList.contains('show')) {
                         dropdownContent.classList.remove('show');
                     } else {
                         dropdownContent.classList.add('show');
-                        
-                        // ドロップダウンの位置を調整
                         const rect = dropdownLink.getBoundingClientRect();
                         dropdownContent.style.top = `${rect.bottom + 10}px`;
                     }
                 }
             }, { passive: false });
 
-            // 画面の他の場所をタップした時にドロップダウンを閉じる
             document.addEventListener('touchstart', (e) => {
                 if (!dropdown.contains(e.target)) {
                     dropdownContent.classList.remove('show');
                 }
             }, { passive: true });
 
-            // スクロール時にドロップダウンを閉じる
             window.addEventListener('scroll', () => {
                 dropdownContent.classList.remove('show');
             }, { passive: true });
-
-            // PDFモーダルの既存のコードはそのまま維持
-            const modal = document.getElementById('modal');
-            const modalPdf = document.getElementById('modal-pdf');
-            const close = document.getElementsByClassName('close')[0];
-            const papers = document.querySelectorAll('.paper-item');
         });
     </script>
 </body>
