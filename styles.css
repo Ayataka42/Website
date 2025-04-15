@@ -325,38 +325,50 @@ h1, h2, h3, h4, h5, h6 {
         z-index: 2;
     }
 
+    .dropdown {
+        position: relative;
+        -webkit-tap-highlight-color: transparent;
+    }
+
     .dropdown-content {
         display: none;
-        position: fixed;  /* absolute から fixed に変更 */
+        position: absolute;
         background-color: var(--primary);
-        min-width: 200px;
+        min-width: 160px;
         border-radius: 8px;
         padding: 0.8rem 0;
         box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         border: 1px solid rgba(249, 238, 220, 0.15);
-        top: auto;  /* auto に変更 */
+        top: calc(100% + 10px);
         left: 50%;
         transform: translateX(-50%);
-        z-index: 1001;
-        -webkit-transform: translateX(-50%);  /* Safari用 */
-        -webkit-backface-visibility: hidden;  /* Safari用 */
-        -webkit-tap-highlight-color: transparent;  /* タップ時のハイライトを無効化 */
+        -webkit-transform: translateX(-50%);
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        -webkit-transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
     .dropdown-content.show {
         display: block;
-        -webkit-animation: fadeIn 0.3s ease;  /* Safari用 */
-        animation: fadeIn 0.3s ease;
+        opacity: 1;
+        visibility: visible;
     }
 
     .dropdown-content a {
         color: var(--light);
-        padding: 0.8rem 1.5rem;
+        padding: 1rem 1.5rem;
         text-decoration: none;
         display: block;
-        transition: all 0.3s ease;
         font-size: 1.1rem;
-        -webkit-tap-highlight-color: transparent;  /* タップ時のハイライトを無効化 */
+        -webkit-tap-highlight-color: transparent;
+        transition: background-color 0.3s ease;
+        -webkit-transition: background-color 0.3s ease;
+    }
+
+    .dropdown-content a:active {
+        background-color: var(--secondary);
     }
 
     @keyframes fadeIn {
