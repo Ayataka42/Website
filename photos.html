@@ -178,48 +178,37 @@
             const dropdownContent = document.querySelector('.dropdown-content');
             const dropdownLink = dropdown.querySelector('.nav-link');
 
-            // クリックとタッチの両方に対応
-            const toggleDropdown = (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const isOpen = dropdownContent.classList.contains('show');
-                
-                // 他の全てのドロップダウンを閉じる
-                document.querySelectorAll('.dropdown-content.show').forEach(content => {
-                    if (content !== dropdownContent) {
-                        content.classList.remove('show');
-                    }
-                });
+            let touchStartTime;
+            let touchEndTime;
 
-                // 現在のドロップダウンの表示を切り替え
-                dropdownContent.classList.toggle('show');
+            dropdownLink.addEventListener('touchstart', (e) => {
+                touchStartTime = new Date().getTime();
+            }, { passive: true });
 
-                if (!isOpen) {
-                    // ドロップダウンの位置を調整
-                    const rect = dropdownLink.getBoundingClientRect();
-                    dropdownContent.style.top = `${rect.bottom}px`;
-                    dropdownContent.style.left = `${rect.left}px`;
-                }
-            };
-
-            // クリックイベントリスナーを追加
-            dropdownLink.addEventListener('click', toggleDropdown);
-            
-            // タッチイベントリスナーを追加
             dropdownLink.addEventListener('touchend', (e) => {
-                if (!e.cancelable) return;
-                toggleDropdown(e);
+                touchEndTime = new Date().getTime();
+                const touchDuration = touchEndTime - touchStartTime;
+
+                // 短いタップのみを処理（300ms以下）
+                if (touchDuration < 300) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // 表示状態を切り替え
+                    if (dropdownContent.classList.contains('show')) {
+                        dropdownContent.classList.remove('show');
+                    } else {
+                        dropdownContent.classList.add('show');
+                        
+                        // ドロップダウンの位置を調整
+                        const rect = dropdownLink.getBoundingClientRect();
+                        dropdownContent.style.top = `${rect.bottom + 10}px`;
+                    }
+                }
             }, { passive: false });
 
-            // 画面の他の場所をタップまたはクリックした時にドロップダウンを閉じる
-            document.addEventListener('click', (e) => {
-                if (!dropdown.contains(e.target)) {
-                    dropdownContent.classList.remove('show');
-                }
-            });
-
-            document.addEventListener('touchend', (e) => {
+            // 画面の他の場所をタップした時にドロップダウンを閉じる
+            document.addEventListener('touchstart', (e) => {
                 if (!dropdown.contains(e.target)) {
                     dropdownContent.classList.remove('show');
                 }
