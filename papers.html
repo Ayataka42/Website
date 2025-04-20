@@ -4,48 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Papers - Nareshatama Nainggolan</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <link rel="manifest" href="img/site.webmanifest">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         .papers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 20px;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .paper-item {
             background-color: rgba(73, 106, 129, 0.1);
             border-radius: 12px;
             border: 1px solid rgba(249, 238, 220, 0.1);
-            padding: 20px;
+            padding: 2rem;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .paper-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background-color: rgba(73, 106, 129, 0.2);
         }
 
         .paper-cover {
             width: 100%;
-            height: 200px;
+            height: 240px;
             object-fit: cover;
             border-radius: 8px;
-            margin-bottom: 15px;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .paper-item:hover .paper-cover {
+            transform: scale(1.02);
         }
 
         .paper-title {
             color: var(--light);
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .paper-item:hover .paper-title {
+            color: var(--accent);
         }
 
         .paper-description {
             color: var(--light);
             opacity: 0.8;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .about-papers {
+            max-width: 800px;
+            margin: 2rem auto 3rem;
+            padding: 0 2rem;
+            color: var(--light);
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .about-papers p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
 
         .modal {
@@ -173,6 +207,10 @@
         <div class="page-title">
             <h1>Research Papers</h1>
             <p>Academic works and research projects</p>
+        </div>
+
+        <div class="about-papers">
+            <p>Through mathematical analysis, I explore and document small but intriguing phenomena from daily life. Each paper represents a journey of discovery, from observation to solution.</p>
         </div>
 
         <div class="papers-grid">

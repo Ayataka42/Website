@@ -29,6 +29,8 @@ h1, h2, h3, h4, h5, h6 {
 .nav-container {
     position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     width: 100%;
     background-color: rgba(43, 58, 103, 0.95);
     backdrop-filter: blur(10px);
@@ -89,13 +91,15 @@ h1, h2, h3, h4, h5, h6 {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 6rem 2rem 2rem;
+    padding-top: calc(4rem + 20px); /* Increased padding to account for fixed nav */
+    padding-bottom: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     position: relative;
     min-height: 100vh;
-    z-index: 2;  /* コンテナを前面に */
+    z-index: 2;
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 .section {
@@ -238,58 +242,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Mobile styles */
 @media screen and (max-width: 768px) {
-    .dropdown-content {
-        position: fixed;
-        width: 180px;
-        top: auto;
-        background-color: var(--primary);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        border: 1px solid rgba(249, 238, 220, 0.15);
+    .container {
+        padding-top: calc(3.5rem + 20px); /* Slightly reduced for mobile but still ensuring content is visible */
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-bottom: 1rem;
     }
 
-    .dropdown-content.show {
-        display: block;
-        animation: fadeIn 0.3s ease forwards;
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px) translateX(-50%);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) translateX(-50%);
-    }
-}
-
-.page-title {
-    text-align: center;
-    margin-bottom: 2rem;
-    position: relative;
-    z-index: 1;  /* Lower than whisper elements */
-}
-
-.page-title h1 {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
-}
-
-.page-title p {
-    color: var(--accent);
-    font-size: 1.2rem;
-}
-
-.content-wrapper,
-.papers-grid,
-.photo-grid,
-.contact-form {
-    position: relative;
-    z-index: 1;  /* Lower than whisper elements */
-}
-
-@media screen and (max-width: 768px) {
     .nav-menu {
         gap: 1rem;
     }
@@ -364,19 +323,18 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .dropdown-content {
-        display: none;
-        position: absolute;
+        position: fixed;
         background-color: var(--primary);
         min-width: 160px;
         border-radius: 8px;
         padding: 0.8rem 0;
         box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         border: 1px solid rgba(249, 238, 220, 0.15);
-        top: calc(100% + 10px);
+        top: auto;  /* Remove absolute positioning */
         left: 50%;
         transform: translateX(-50%);
         -webkit-transform: translateX(-50%);
-        z-index: 9999;
+        z-index: 1002;  /* Ensure it's above the nav-container */
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -435,6 +393,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media screen and (max-width: 480px) {
+    .container {
+        padding-top: calc(3rem + 20px); /* Further reduced for smaller screens */
+    }
+
     .nav-container {
         padding: 0.3rem 0;
     }
@@ -523,4 +485,12 @@ h1, h2, h3, h4, h5, h6 {
         bottom: 20%;
         right: -8%;
     }
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    margin-top: 1rem;  /* Added margin-top for better spacing */
+    position: relative;
+    z-index: 1;
 }
