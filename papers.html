@@ -156,6 +156,7 @@
                         <a href="papers.html">Papers</a>
                     </div>
                 </div>
+                <a href="activities.html" class="nav-link">Activities</a>
                 <a href="contact.html" class="nav-link">Contact</a>
             </div>
         </div>
@@ -209,43 +210,45 @@
                 });
             });
 
-            // ドロップダウンメニューの既存のコード
             const dropdown = document.querySelector('.dropdown');
             const dropdownContent = document.querySelector('.dropdown-content');
             const dropdownLink = dropdown.querySelector('.nav-link');
 
-            let touchStartTime;
-            let touchEndTime;
+            // Handle click/touch events
+            dropdownLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const isShown = dropdownContent.classList.contains('show');
+                
+                // Close any open dropdowns first
+                document.querySelectorAll('.dropdown-content.show').forEach(el => {
+                    el.classList.remove('show');
+                });
 
-            dropdownLink.addEventListener('touchstart', (e) => {
-                touchStartTime = new Date().getTime();
-            }, { passive: true });
-
-            dropdownLink.addEventListener('touchend', (e) => {
-                touchEndTime = new Date().getTime();
-                const touchDuration = touchEndTime - touchStartTime;
-
-                if (touchDuration < 300) {
-                    e.preventDefault();
-                    e.stopPropagation();
+                if (!isShown) {
+                    dropdownContent.classList.add('show');
                     
-                    if (dropdownContent.classList.contains('show')) {
-                        dropdownContent.classList.remove('show');
-                    } else {
-                        dropdownContent.classList.add('show');
-                        const rect = dropdownLink.getBoundingClientRect();
-                        dropdownContent.style.top = `${rect.bottom + 10}px`;
-                    }
+                    // Position the dropdown
+                    const rect = dropdownLink.getBoundingClientRect();
+                    dropdownContent.style.top = `${rect.bottom + 10}px`;
                 }
-            }, { passive: false });
+            });
 
-            document.addEventListener('touchstart', (e) => {
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
                 if (!dropdown.contains(e.target)) {
                     dropdownContent.classList.remove('show');
                 }
+            });
+
+            // Close dropdown when scrolling
+            window.addEventListener('scroll', () => {
+                dropdownContent.classList.remove('show');
             }, { passive: true });
 
-            window.addEventListener('scroll', () => {
+            // Close dropdown when window is resized
+            window.addEventListener('resize', () => {
                 dropdownContent.classList.remove('show');
             }, { passive: true });
         });
