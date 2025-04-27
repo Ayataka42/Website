@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Nareshatama Nainggolan</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .service-card {
+            background-color: rgba(73, 106, 129, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(249, 238, 220, 0.1);
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        .service-description {
+            color: var(--light);
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-details {
+            list-style: none;
+            padding: 0;
+        }
+
+        .service-details li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .service-details i {
+            color: var(--accent);
+            margin-top: 0.25rem;
+        }
+
+        .achievement-badge {
+            background-color: rgba(216, 71, 39, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9em;
+            border: 1px solid rgba(216, 71, 39, 0.2);
+            margin-top: 1rem;
+            display: inline-block;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--accent-2);
+        }
+
+        @media screen and (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 1rem 0.5rem;
+            }
+
+            .service-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a href="index.html" class="nav-logo">NN</a>
+            <div class="nav-menu">
+                <a href="about.html" class="nav-link">About</a>
+                <div class="dropdown">
+                    <a href="#" class="nav-link">Portfolio <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="photos.html">Photos</a>
+                        <a href="papers.html">Papers</a>
+                    </div>
+                </div>
+                <a href="activities.html" class="nav-link">Activities</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="whisper top-left floating"><i class="fas fa-chalkboard-teacher fa-3x"></i></div>
+        <div class="whisper top-right floating"><i class="fas fa-language fa-3x"></i></div>
+        <div class="whisper middle-left floating-reverse"><i class="fas fa-cube fa-3x"></i></div>
+        <div class="whisper middle-right floating-reverse"><i class="fas fa-square-root-alt fa-3x"></i></div>
+        <div class="whisper bottom-left floating"><i class="fas fa-graduation-cap fa-3x"></i></div>
+        <div class="whisper bottom-right floating"><i class="fas fa-book fa-3x"></i></div>
+
+        <div class="page-title">
+            <h1>Services</h1>
+            <p>Personalized tutoring and educational support</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                <h2 class="service-title">Japanese Language Tutoring</h2>
+                <p class="service-description">Native Japanese speaker offering conversation practice and comprehensive language instruction for all levels.</p>
+                <ul class="service-details">
+                    <li><i class="fas fa-check"></i> JLPT N1 certified instructor</li>
+                    <li><i class="fas fa-check"></i> Conversation practice</li>
+                    <li><i class="fas fa-check"></i> Grammar and writing instruction</li>
+                    <li><i class="fas fa-check"></i> Cultural context and business Japanese</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-square-root-alt"></i>
+                </div>
+                <h2 class="service-title">Mathematics Tutoring</h2>
+                <p class="service-description">Experienced in teaching mathematics up to IB Mathematics SL level, with a focus on building strong foundational understanding.</p>
+                <ul class="service-details">
+                    <li><i class="fas fa-check"></i> Pre-algebra to IB Mathematics SL</li>
+                    <li><i class="fas fa-check"></i> Problem-solving strategies</li>
+                    <li><i class="fas fa-check"></i> Test preparation</li>
+                    <li><i class="fas fa-check"></i> Homework assistance</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <h2 class="service-title">Rubik's Cube Training</h2>
+                <p class="service-description">Learn speed cubing techniques from an experienced competitive cuber. From beginners to advanced solvers.</p>
+                <ul class="service-details">
+                    <li><i class="fas fa-check"></i> Beginner method instruction</li>
+                    <li><i class="fas fa-check"></i> Advanced algorithms (CFOP, Roux)</li>
+                    <li><i class="fas fa-check"></i> Competition preparation</li>
+                    <li><i class="fas fa-check"></i> Multiple puzzle types</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="achievement-badge" style="text-align: center; margin: 2rem auto; display: block; width: fit-content;">
+            50+ Hours of Tutoring Experience
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="contact.html" class="social-link">
+                <i class="fas fa-envelope"></i> Interested in tutoring? Contact me
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropdown = document.querySelector('.dropdown');
+            const dropdownContent = document.querySelector('.dropdown-content');
+            const dropdownLink = dropdown.querySelector('.nav-link');
+
+            dropdownLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const isShown = dropdownContent.classList.contains('show');
+                document.querySelectorAll('.dropdown-content.show').forEach(el => {
+                    el.classList.remove('show');
+                });
+                if (!isShown) {
+                    dropdownContent.classList.add('show');
+                    const rect = dropdownLink.getBoundingClientRect();
+                    dropdownContent.style.top = `${rect.bottom + 10}px`;
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!dropdown.contains(e.target)) {
+                    dropdownContent.classList.remove('show');
+                }
+            });
+
+            window.addEventListener('scroll', () => {
+                dropdownContent.classList.remove('show');
+            }, { passive: true });
+        });
+    </script>
+</body>
+</html>

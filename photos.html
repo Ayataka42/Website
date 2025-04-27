@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photography - Nareshatama Nainggolan</title>
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
-    <link rel="manifest" href="img/site.webmanifest">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -120,73 +115,51 @@
             }
         }
 
-        .modal-nav {
+        .modal-nav-button {
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--light);
-            font-size: 2rem;
-            cursor: pointer;
             background-color: rgba(0, 0, 0, 0.5);
+            color: var(--light);
+            border: none;
             width: 50px;
             height: 50px;
             border-radius: 50%;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 24px;
             transition: all 0.3s ease;
             z-index: 1001;
         }
 
-        .modal-nav:hover {
+        .modal-nav-button:hover {
             background-color: var(--accent);
-            transform: translateY(-50%) scale(1.1);
         }
 
-        .prev {
+        .modal-prev {
             left: 20px;
         }
 
-        .next {
+        .modal-next {
             right: 20px;
         }
 
         @media screen and (max-width: 768px) {
-            .modal-nav {
+            .modal-nav-button {
                 width: 40px;
                 height: 40px;
-                font-size: 1.5rem;
+                font-size: 20px;
             }
 
-            .prev {
+            .modal-prev {
                 left: 10px;
             }
 
-            .next {
+            .modal-next {
                 right: 10px;
             }
-        }
-
-        .about-photography {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 0 20px;
-            color: var(--light);
-            line-height: 1.6;
-        }
-
-        .about-photography p {
-            margin-bottom: 1rem;
-        }
-
-        .about-photography a {
-            color: var(--accent);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .about-photography a:hover {
-            color: var(--accent-2);
         }
     </style>
 </head>
@@ -197,13 +170,14 @@
             <div class="nav-menu">
                 <a href="about.html" class="nav-link">About</a>
                 <div class="dropdown">
-                    <a href="#" class="nav-link">Work <i class="fas fa-chevron-down"></i></a>
+                    <a href="#" class="nav-link">Portfolio <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-content">
                         <a href="photos.html">Photos</a>
                         <a href="papers.html">Papers</a>
                     </div>
                 </div>
                 <a href="activities.html" class="nav-link">Activities</a>
+                <a href="services.html" class="nav-link">Services</a>
                 <a href="contact.html" class="nav-link">Contact</a>
             </div>
         </div>
@@ -222,10 +196,40 @@
             <p>Capturing moments through my lens</p>
         </div>
 
-        <div class="about-photography">
+        <div class="page-introduction">
             <p>My journey began with the school yearbook, where I discovered the power of capturing life's moments in a single frame. I specialize in street photography, documenting the beauty in everyday scenes, while also covering events for sports and organizations like my school's robotics club.</p>
-            <p>Open to exploring new styles, particularly portrait photography. If my work interests you, feel free to <a href="contact.html">reach out</a>.</p>
+            <p>Open to exploring new styles, particularly portrait photography. If my work interests you, feel free to <a href="contact.html" class="text-link">reach out</a>.</p>
         </div>
+
+        <style>
+            .page-introduction {
+                max-width: 800px;
+                margin: 0 auto 3rem;
+                text-align: center;
+                padding: 0 1rem;
+                color: var(--light);
+                line-height: 1.6;
+            }
+
+            .page-introduction p {
+                margin-bottom: 1rem;
+                opacity: 0.9;
+            }
+
+            .page-introduction p:last-child {
+                margin-bottom: 0;
+            }
+
+            .text-link {
+                color: var(--accent);
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+            .text-link:hover {
+                color: var(--accent-2);
+            }
+        </style>
 
         <div class="photo-grid">
             <div class="photo-item"><img src="photo/NGN_0080.jpg" alt="Photo"></div>
@@ -249,8 +253,12 @@
 
     <div id="modal" class="modal">
         <span class="close">&times;</span>
-        <div class="modal-nav prev"><i class="fas fa-chevron-left"></i></div>
-        <div class="modal-nav next"><i class="fas fa-chevron-right"></i></div>
+        <button class="modal-nav-button modal-prev" id="prevButton">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="modal-nav-button modal-next" id="nextButton">
+            <i class="fas fa-chevron-right"></i>
+        </button>
         <img class="modal-content" id="modal-img">
     </div>
 
@@ -260,59 +268,85 @@
             const dropdownContent = document.querySelector('.dropdown-content');
             const dropdownLink = dropdown.querySelector('.nav-link');
 
-            // Handle click/touch events
-            dropdownLink.addEventListener('click', (e) => {
+            // クリックとタッチの両方に対応
+            const toggleDropdown = (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                const isShown = dropdownContent.classList.contains('show');
+                const isOpen = dropdownContent.classList.contains('show');
                 
-                // Close any open dropdowns first
-                document.querySelectorAll('.dropdown-content.show').forEach(el => {
-                    el.classList.remove('show');
+                // 他の全てのドロップダウンを閉じる
+                document.querySelectorAll('.dropdown-content.show').forEach(content => {
+                    if (content !== dropdownContent) {
+                        content.classList.remove('show');
+                    }
                 });
 
-                if (!isShown) {
-                    dropdownContent.classList.add('show');
-                    
-                    // Position the dropdown
-                    const rect = dropdownLink.getBoundingClientRect();
-                    dropdownContent.style.top = `${rect.bottom + 10}px`;
-                }
-            });
+                // 現在のドロップダウンの表示を切り替え
+                dropdownContent.classList.toggle('show');
 
-            // Close dropdown when clicking outside
+                if (!isOpen) {
+                    // ドロップダウンの位置を調整
+                    const rect = dropdownLink.getBoundingClientRect();
+                    dropdownContent.style.top = `${rect.bottom}px`;
+                    dropdownContent.style.left = `${rect.left}px`;
+                }
+            };
+
+            // クリックイベントリスナーを追加
+            dropdownLink.addEventListener('click', toggleDropdown);
+            
+            // タッチイベントリスナーを追加
+            dropdownLink.addEventListener('touchend', (e) => {
+                if (!e.cancelable) return;
+                toggleDropdown(e);
+            }, { passive: false });
+
+            // 画面の他の場所をタップまたはクリックした時にドロップダウンを閉じる
             document.addEventListener('click', (e) => {
                 if (!dropdown.contains(e.target)) {
                     dropdownContent.classList.remove('show');
                 }
             });
 
-            // Close dropdown when scrolling
-            window.addEventListener('scroll', () => {
-                dropdownContent.classList.remove('show');
+            document.addEventListener('touchend', (e) => {
+                if (!dropdown.contains(e.target)) {
+                    dropdownContent.classList.remove('show');
+                }
             }, { passive: true });
 
-            // Close dropdown when window is resized
-            window.addEventListener('resize', () => {
+            // スクロール時にドロップダウンを閉じる
+            window.addEventListener('scroll', () => {
                 dropdownContent.classList.remove('show');
             }, { passive: true });
 
             const modal = document.getElementById('modal');
             const modalImg = document.getElementById('modal-img');
             const close = document.getElementsByClassName('close')[0];
+            const prevButton = document.getElementById('prevButton');
+            const nextButton = document.getElementById('nextButton');
             const photos = document.querySelectorAll('.photo-item img');
-            const prev = document.querySelector('.prev');
-            const next = document.querySelector('.next');
-            
             let currentPhotoIndex = 0;
-            const photosSrc = Array.from(photos).map(photo => photo.src);
 
+            // 写真を表示する関数
             function showPhoto(index) {
                 currentPhotoIndex = index;
-                modalImg.src = photosSrc[index];
+                modalImg.src = photos[index].src;
             }
 
+            // 次の写真を表示
+            function showNextPhoto() {
+                currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+                showPhoto(currentPhotoIndex);
+            }
+
+            // 前の写真を表示
+            function showPrevPhoto() {
+                currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+                showPhoto(currentPhotoIndex);
+            }
+
+            // 写真をクリックしたときの処理
             photos.forEach((photo, index) => {
                 photo.onclick = function() {
                     modal.style.display = 'block';
@@ -320,63 +354,66 @@
                 }
             });
 
-            // Navigation functions
-            function showPrevPhoto() {
-                currentPhotoIndex = (currentPhotoIndex - 1 + photosSrc.length) % photosSrc.length;
-                showPhoto(currentPhotoIndex);
-            }
+            // ナビゲーションボタンのクリックイベント
+            nextButton.onclick = (e) => {
+                e.stopPropagation();
+                showNextPhoto();
+            };
 
-            function showNextPhoto() {
-                currentPhotoIndex = (currentPhotoIndex + 1) % photosSrc.length;
-                showPhoto(currentPhotoIndex);
-            }
+            prevButton.onclick = (e) => {
+                e.stopPropagation();
+                showPrevPhoto();
+            };
 
-            // Click events for navigation
-            prev.onclick = showPrevPhoto;
-            next.onclick = showNextPhoto;
-
-            // Keyboard navigation
+            // キーボードナビゲーション
             document.addEventListener('keydown', (e) => {
                 if (modal.style.display === 'block') {
-                    if (e.key === 'ArrowLeft') showPrevPhoto();
-                    if (e.key === 'ArrowRight') showNextPhoto();
-                    if (e.key === 'Escape') modal.style.display = 'none';
+                    if (e.key === 'ArrowRight') {
+                        showNextPhoto();
+                    } else if (e.key === 'ArrowLeft') {
+                        showPrevPhoto();
+                    } else if (e.key === 'Escape') {
+                        modal.style.display = 'none';
+                    }
                 }
             });
 
-            // Swipe functionality
+            // スワイプナビゲーション
             let touchStartX = 0;
             let touchEndX = 0;
 
-            modal.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
+            modalImg.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
             }, { passive: true });
 
-            modal.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-            }, { passive: true });
+            modalImg.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+            }, { passive: false });
 
-            function handleSwipe() {
-                const swipeThreshold = 50;
+            modalImg.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].clientX;
                 const swipeDistance = touchEndX - touchStartX;
-                
-                if (Math.abs(swipeDistance) > swipeThreshold) {
+
+                // スワイプの距離が50px以上の場合のみナビゲート
+                if (Math.abs(swipeDistance) > 50) {
                     if (swipeDistance > 0) {
                         showPrevPhoto();
                     } else {
                         showNextPhoto();
                     }
                 }
+            }, { passive: true });
+
+            // モーダルを閉じる処理
+            close.onclick = function() {
+                modal.style.display = 'none';
             }
 
-            // Close modal
-            close.onclick = () => modal.style.display = 'none';
-            window.onclick = (event) => {
+            modal.onclick = function(event) {
                 if (event.target === modal) {
                     modal.style.display = 'none';
                 }
-            };
+            }
         });
     </script>
 </body>

@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Nareshatama Nainggolan</title>
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
-    <link rel="manifest" href="img/site.webmanifest">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -18,17 +13,17 @@
         }
 
         .contact-form {
-            width: 90%;
-            max-width: 800px;
+            max-width: 800px;  /* 600pxから800pxに増加 */
+            width: 90%;        /* 幅を90%に設定して、適切なマージンを確保 */
             margin: 0 auto;
-            padding: 2.5rem;
+            padding: 3rem;     /* パディングを2remから3remに増加 */
             background-color: rgba(73, 106, 129, 0.1);
             border-radius: 12px;
             border: 1px solid rgba(249, 238, 220, 0.1);
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;  /* 1.5remから2remに増加 */
         }
 
         label {
@@ -96,29 +91,17 @@
             transform: translateY(-2px);
         }
 
-        @media screen and (max-width: 1200px) {
+        @media screen and (min-width: 1200px) {
             .contact-form {
-                width: 85%;
-                max-width: 700px;
+                max-width: 1000px;  /* より広い画面で最大幅を1000pxに */
+                padding: 4rem;      /* より広い画面でパディングを増加 */
             }
         }
 
         @media screen and (max-width: 768px) {
             .contact-form {
-                width: 90%;
-                max-width: none;
-                padding: 1.5rem;
-            }
-            
-            .form-group {
-                margin-bottom: 1.25rem;
-            }
-        }
-
-        @media screen and (max-width: 480px) {
-            .contact-form {
-                width: 95%;
-                padding: 1.25rem;
+                width: 95%;        /* モバイルでの幅を95%に */
+                padding: 1.5rem;   /* モバイルでのパディングを調整 */
             }
         }
     </style>
@@ -130,13 +113,14 @@
             <div class="nav-menu">
                 <a href="about.html" class="nav-link">About</a>
                 <div class="dropdown">
-                    <a href="#" class="nav-link">Work <i class="fas fa-chevron-down"></i></a>
+                    <a href="#" class="nav-link">Portfolio <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-content">
                         <a href="photos.html">Photos</a>
                         <a href="papers.html">Papers</a>
                     </div>
                 </div>
                 <a href="activities.html" class="nav-link">Activities</a>
+                <a href="services.html" class="nav-link">Services</a>
                 <a href="contact.html" class="nav-link">Contact</a>
             </div>
         </div>
@@ -188,41 +172,55 @@
             const dropdownContent = document.querySelector('.dropdown-content');
             const dropdownLink = dropdown.querySelector('.nav-link');
 
-            // Handle click/touch events
-            dropdownLink.addEventListener('click', (e) => {
+            // クリックとタッチの両方に対応
+            const toggleDropdown = (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                const isShown = dropdownContent.classList.contains('show');
+                const isOpen = dropdownContent.classList.contains('show');
                 
-                // Close any open dropdowns first
-                document.querySelectorAll('.dropdown-content.show').forEach(el => {
-                    el.classList.remove('show');
+                // 他の全てのドロップダウンを閉じる
+                document.querySelectorAll('.dropdown-content.show').forEach(content => {
+                    if (content !== dropdownContent) {
+                        content.classList.remove('show');
+                    }
                 });
 
-                if (!isShown) {
-                    dropdownContent.classList.add('show');
-                    
-                    // Position the dropdown
-                    const rect = dropdownLink.getBoundingClientRect();
-                    dropdownContent.style.top = `${rect.bottom + 10}px`;
-                }
-            });
+                // 現在のドロップダウンの表示を切り替え
+                dropdownContent.classList.toggle('show');
 
-            // Close dropdown when clicking outside
+                if (!isOpen) {
+                    // ドロップダウンの位置を調整
+                    const rect = dropdownLink.getBoundingClientRect();
+                    dropdownContent.style.top = `${rect.bottom}px`;
+                    dropdownContent.style.left = `${rect.left}px`;
+                }
+            };
+
+            // クリックイベントリスナーを追加
+            dropdownLink.addEventListener('click', toggleDropdown);
+            
+            // タッチイベントリスナーを追加
+            dropdownLink.addEventListener('touchend', (e) => {
+                if (!e.cancelable) return;
+                toggleDropdown(e);
+            }, { passive: false });
+
+            // 画面の他の場所をタップまたはクリックした時にドロップダウンを閉じる
             document.addEventListener('click', (e) => {
                 if (!dropdown.contains(e.target)) {
                     dropdownContent.classList.remove('show');
                 }
             });
 
-            // Close dropdown when scrolling
-            window.addEventListener('scroll', () => {
-                dropdownContent.classList.remove('show');
+            document.addEventListener('touchend', (e) => {
+                if (!dropdown.contains(e.target)) {
+                    dropdownContent.classList.remove('show');
+                }
             }, { passive: true });
 
-            // Close dropdown when window is resized
-            window.addEventListener('resize', () => {
+            // スクロール時にドロップダウンを閉じる
+            window.addEventListener('scroll', () => {
                 dropdownContent.classList.remove('show');
             }, { passive: true });
         });

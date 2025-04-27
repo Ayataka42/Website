@@ -270,6 +270,53 @@
             background-color: var(--accent);
             transform: rotate(90deg);
         }
+
+        .modal-nav-button {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: var(--light);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .modal-nav-button:hover {
+            background-color: var(--accent);
+        }
+
+        .modal-prev {
+            left: 20px;
+        }
+
+        .modal-next {
+            right: 20px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .modal-nav-button {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .modal-prev {
+                left: 10px;
+            }
+
+            .modal-next {
+                right: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -279,13 +326,14 @@
             <div class="nav-menu">
                 <a href="about.html" class="nav-link">About</a>
                 <div class="dropdown">
-                    <a href="#" class="nav-link">Work <i class="fas fa-chevron-down"></i></a>
+                    <a href="#" class="nav-link">Portfolio <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-content">
                         <a href="photos.html">Photos</a>
                         <a href="papers.html">Papers</a>
                     </div>
                 </div>
                 <a href="activities.html" class="nav-link">Activities</a>
+                <a href="services.html" class="nav-link">Services</a>
                 <a href="contact.html" class="nav-link">Contact</a>
             </div>
         </div>
@@ -340,13 +388,13 @@
                 
                 <div class="video-gallery">
                     <div class="video-wrapper">
-                        <video class="solve-video" controls preload="metadata">
+                        <video class="solve-video" controls preload="metadata" poster="cubing/Cubing_thumbnail.png">
                             <source src="cubing/Cubing.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
                     <div class="video-wrapper">
-                        <video class="solve-video" controls preload="metadata">
+                        <video class="solve-video" controls preload="metadata" poster="cubing/Cubing2_thumbnail.png">
                             <source src="cubing/Cubing2.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -372,26 +420,6 @@
 
             <div class="activity-card">
                 <div class="activity-icon">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                </div>
-                <h2 class="activity-title">Tutoring</h2>
-                <p class="activity-description">My passion for teaching began with helping my younger sister with mathematics and Rubik's cube solving. Today, I guide students of all ages through mathematics and Japanese conversation, working with learners from the US, Japan, and Indonesia.</p>
-                <ul class="activity-details">
-                    <li><i class="fas fa-check"></i> Japanese language instruction (N1 certified)</li>
-                    <li><i class="fas fa-check"></i> Mathematics tutoring up to IB SL level</li>
-                    <li><i class="fas fa-check"></i> Students ranging from elementary school to adults</li>
-                    <li><i class="fas fa-check"></i> International teaching experience (US, Japan, Indonesia)</li>
-                </ul>
-                <div class="achievement-badge">
-                    50+ Hours of Tutoring Experience
-                </div>
-                <a href="contact.html" class="social-link">
-                    <i class="fas fa-envelope"></i> Interested in tutoring? Contact me
-                </a>
-            </div>
-
-            <div class="activity-card">
-                <div class="activity-icon">
                     <i class="fas fa-gamepad"></i>
                 </div>
                 <h2 class="activity-title">Game Development</h2>
@@ -400,7 +428,7 @@
                 <div class="video-wrapper">
                     <div class="video-title">Starburst - Unity Game Demo</div>
                     <div class="video-container">
-                        <video class="solve-video" controls preload="metadata">
+                        <video class="solve-video" controls preload="metadata" poster="game/Starburst_thumbnail.png">
                             <source src="game/Starburst.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -408,13 +436,49 @@
                 </div>
 
                 <ul class="activity-details">
+                    <li><i class="fas fa-code"></i> Unity and C# development</li>
+                    <li><i class="fas fa-users"></i> Collaborative project experience</li>
+                    <li><i class="fas fa-leaf"></i> Focus on environmental awareness</li>
+                    <li><i class="fas fa-palette"></i> Visual storytelling integration</li>
                 </ul>
+            </div>
+
+            <div class="activity-card">
+                <div class="activity-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <h2 class="activity-title">Lunaraya - Natural Soap Vendor</h2>
+                <p class="activity-description">Working with a local artisanal soap maker, assisting in sales at farmers markets. Independently managing the vendor booth and providing personalized customer service for natural, handcrafted soaps.</p>
+                
+                <div class="photo-gallery">
+                    <img src="Lunaraya/IMG_3152.jpg" alt="Lunaraya Soap Display" class="gallery-img">
+                    <img src="Lunaraya/IMG_3153.jpg" alt="Soap Products" class="gallery-img">
+                    <img src="Lunaraya/IMG_3154.jpg" alt="Market Setup" class="gallery-img">
+                    <img src="Lunaraya/IMG_3155.jpg" alt="Soap Collection" class="gallery-img">
+                </div>
+
+                <ul class="activity-details">
+                    <li><i class="fas fa-user-friends"></i> Customer Service: Explaining product varieties and making personalized recommendations</li>
+                    <li><i class="fas fa-boxes"></i> Booth Management: Maintaining inventory and display presentation</li>
+                    <li><i class="fas fa-store-alt"></i> Operations: Handling booth setup, closure, and overall management</li>
+                    <li><i class="fas fa-cash-register"></i> Sales: Processing transactions and managing cash handling</li>
+                </ul>
+                
+                <a href="https://lunaraya.com" target="_blank" class="social-link">
+                    <i class="fas fa-shopping-cart"></i> Visit Lunaraya's Online Shop
+                </a>
             </div>
         </div>
     </div>
 
     <div id="photoModal" class="modal">
         <span class="close">&times;</span>
+        <button class="modal-nav-button modal-prev" id="prevButton">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="modal-nav-button modal-next" id="nextButton">
+            <i class="fas fa-chevron-right"></i>
+        </button>
         <img class="modal-content" id="modalImg">
     </div>
 
@@ -456,30 +520,102 @@
             const modal = document.getElementById('photoModal');
             const modalImg = document.getElementById('modalImg');
             const close = modal.querySelector('.close');
+            const prevButton = document.getElementById('prevButton');
+            const nextButton = document.getElementById('nextButton');
             const galleryImages = document.querySelectorAll('.gallery-img');
+            let currentPhotoIndex = 0;
+            let currentGalleryImages = [];
 
-            galleryImages.forEach(img => {
-                img.onclick = function() {
-                    modal.style.display = 'block';
-                    modalImg.src = this.src;
+            // 写真を表示する関数
+            function showPhoto(images, index) {
+                currentGalleryImages = images;
+                currentPhotoIndex = index;
+                modalImg.src = images[index].src;
+            }
+
+            // 次の写真を表示
+            function showNextPhoto() {
+                currentPhotoIndex = (currentPhotoIndex + 1) % currentGalleryImages.length;
+                modalImg.src = currentGalleryImages[currentPhotoIndex].src;
+            }
+
+            // 前の写真を表示
+            function showPrevPhoto() {
+                currentPhotoIndex = (currentPhotoIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+                modalImg.src = currentGalleryImages[currentPhotoIndex].src;
+            }
+
+            // 写真をクリックしたときの処理
+            document.querySelectorAll('.photo-gallery').forEach(gallery => {
+                const images = gallery.querySelectorAll('.gallery-img');
+                images.forEach((img, index) => {
+                    img.onclick = function() {
+                        modal.style.display = 'block';
+                        showPhoto(Array.from(images), index);
+                    }
+                });
+            });
+
+            // ナビゲーションボタンのクリックイベント
+            nextButton.onclick = (e) => {
+                e.stopPropagation();
+                showNextPhoto();
+            };
+
+            prevButton.onclick = (e) => {
+                e.stopPropagation();
+                showPrevPhoto();
+            };
+
+            // キーボードナビゲーション
+            document.addEventListener('keydown', (e) => {
+                if (modal.style.display === 'block') {
+                    if (e.key === 'ArrowRight') {
+                        showNextPhoto();
+                    } else if (e.key === 'ArrowLeft') {
+                        showPrevPhoto();
+                    } else if (e.key === 'Escape') {
+                        modal.style.display = 'none';
+                    }
                 }
             });
 
+            // スワイプナビゲーション
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            modalImg.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+            }, { passive: true });
+
+            modalImg.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+            }, { passive: false });
+
+            modalImg.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].clientX;
+                const swipeDistance = touchEndX - touchStartX;
+
+                // スワイプの距離が50px以上の場合のみナビゲート
+                if (Math.abs(swipeDistance) > 50) {
+                    if (swipeDistance > 0) {
+                        showPrevPhoto();
+                    } else {
+                        showNextPhoto();
+                    }
+                }
+            }, { passive: true });
+
+            // モーダルを閉じる処理
             close.onclick = function() {
                 modal.style.display = 'none';
             }
 
-            window.onclick = function(event) {
-                if (event.target == modal) {
+            modal.onclick = function(event) {
+                if (event.target === modal) {
                     modal.style.display = 'none';
                 }
             }
-
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && modal.style.display === 'block') {
-                    modal.style.display = 'none';
-                }
-            });
         });
     </script>
 </body>
