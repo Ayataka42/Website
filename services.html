@@ -72,6 +72,33 @@
             display: inline-block;
         }
 
+        .achievement-results {
+            background-color: rgba(216, 71, 39, 0.2);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            border-left: 4px solid var(--accent);
+            font-size: 0.95em;
+            position: relative;
+        }
+
+        .achievement-results i {
+            color: var(--accent);
+            margin-right: 0.5rem;
+        }
+        
+        .achievement-results:before {
+            content: 'STUDENT OUTCOMES';
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: var(--dark);
+            padding: 0 10px;
+            font-size: 0.75em;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
         .social-link {
             display: inline-flex;
             align-items: center;
@@ -103,15 +130,22 @@
     <nav class="nav-container">
         <div class="nav-content">
             <a href="index.html" class="nav-logo">NN</a>
+            <button class="hamburger" aria-label="Menu">
+                <span class="hamburger-icon"></span>
+            </button>
             <div class="nav-menu">
                 <a href="about.html" class="nav-link">About</a>
-                <div class="dropdown">
-                    <a href="#" class="nav-link">Portfolio <i class="fas fa-chevron-down"></i></a>
+                <!-- デスクトップ表示用のドロップダウン -->
+                <div class="dropdown desktop-only">
+                    <a href="#" class="nav-link dropdown-toggle">Portfolio <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-content">
                         <a href="photos.html">Photos</a>
                         <a href="papers.html">Papers</a>
                     </div>
                 </div>
+                <!-- モバイル表示用の直接リンク -->
+                <a href="photos.html" class="nav-link mobile-only">Photos</a>
+                <a href="papers.html" class="nav-link mobile-only">Papers</a>
                 <a href="activities.html" class="nav-link">Activities</a>
                 <a href="services.html" class="nav-link">Services</a>
                 <a href="contact.html" class="nav-link">Contact</a>
@@ -131,6 +165,15 @@
             <h1>Services</h1>
             <p>Personalized tutoring and educational support</p>
         </div>
+        
+        <div class="about-section" style="margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto; text-align: center;">
+            <p style="line-height: 1.6; margin-bottom: 1.5rem;">
+                I'm passionate about sharing knowledge and seeing people learn new skills. Starting with teaching my sister (7 years younger than me) math and grammar concepts, and even how to solve a Rubik's cube, I now teach students ranging from elementary school to adults across the US, Japan, and Indonesia in basic algebra and Japanese conversation. It's truly fascinating to see students quickly pick up and apply new skills.
+            </p>
+            <p style="line-height: 1.6;">
+                If you'd like to learn more about my tutoring services or are interested in lessons, feel free to contact me through the contact page.
+            </p>
+        </div>
 
         <div class="services-grid">
             <div class="service-card">
@@ -138,13 +181,16 @@
                     <i class="fas fa-language"></i>
                 </div>
                 <h2 class="service-title">Japanese Language Tutoring</h2>
-                <p class="service-description">Native Japanese speaker offering conversation practice and comprehensive language instruction for all levels.</p>
+                <p class="service-description">Offering Japanese conversation practice and language instruction for beginners to intermediate learners.</p>
                 <ul class="service-details">
-                    <li><i class="fas fa-check"></i> JLPT N1 certified instructor</li>
                     <li><i class="fas fa-check"></i> Conversation practice</li>
-                    <li><i class="fas fa-check"></i> Grammar and writing instruction</li>
-                    <li><i class="fas fa-check"></i> Cultural context and business Japanese</li>
+                    <li><i class="fas fa-check"></i> Basic grammar instruction</li>
+                    <li><i class="fas fa-check"></i> Vocabulary building</li>
+                    <li><i class="fas fa-check"></i> Cultural context</li>
                 </ul>
+                <div class="achievement-results">
+                    <i class="fas fa-trophy"></i> My Japanese students successfully mastered both hiragana and katakana writing systems, and developed practical skills for daily conversations and discussions.
+                </div>
             </div>
 
             <div class="service-card">
@@ -152,13 +198,16 @@
                     <i class="fas fa-square-root-alt"></i>
                 </div>
                 <h2 class="service-title">Mathematics Tutoring</h2>
-                <p class="service-description">Experienced in teaching mathematics up to IB Mathematics SL level, with a focus on building strong foundational understanding.</p>
+                <p class="service-description">Experienced in teaching basic mathematics with a focus on building strong foundational understanding.</p>
                 <ul class="service-details">
-                    <li><i class="fas fa-check"></i> Pre-algebra to IB Mathematics SL</li>
+                    <li><i class="fas fa-check"></i> Basic algebra</li>
                     <li><i class="fas fa-check"></i> Problem-solving strategies</li>
-                    <li><i class="fas fa-check"></i> Test preparation</li>
                     <li><i class="fas fa-check"></i> Homework assistance</li>
+                    <li><i class="fas fa-check"></i> Personalized learning plans</li>
                 </ul>
+                <div class="achievement-results">
+                    <i class="fas fa-trophy"></i> Elementary school students I've taught have mastered advanced concepts like systems of equations and negative numbers, well beyond their grade level.
+                </div>
             </div>
 
             <div class="service-card">
@@ -166,18 +215,21 @@
                     <i class="fas fa-cube"></i>
                 </div>
                 <h2 class="service-title">Rubik's Cube Training</h2>
-                <p class="service-description">Learn speed cubing techniques from an experienced competitive cuber. From beginners to advanced solvers.</p>
+                <p class="service-description">Learn Rubik's cube solving techniques from beginner to intermediate level.</p>
                 <ul class="service-details">
                     <li><i class="fas fa-check"></i> Beginner method instruction</li>
-                    <li><i class="fas fa-check"></i> Advanced algorithms (CFOP, Roux)</li>
-                    <li><i class="fas fa-check"></i> Competition preparation</li>
-                    <li><i class="fas fa-check"></i> Multiple puzzle types</li>
+                    <li><i class="fas fa-check"></i> Basic algorithms</li>
+                    <li><i class="fas fa-check"></i> Speed improvement techniques</li>
+                    <li><i class="fas fa-check"></i> Pattern solving</li>
                 </ul>
+                <div class="achievement-results">
+                    <i class="fas fa-trophy"></i> Students learn to solve the cube completely from scratch, typically mastering the basic method within just a few sessions.
+                </div>
             </div>
         </div>
 
         <div class="achievement-badge" style="text-align: center; margin: 2rem auto; display: block; width: fit-content;">
-            50+ Hours of Tutoring Experience
+            Teaching students across US, Japan, and Indonesia
         </div>
         
         <div style="text-align: center; margin-top: 2rem;">
@@ -189,32 +241,27 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const dropdown = document.querySelector('.dropdown');
-            const dropdownContent = document.querySelector('.dropdown-content');
-            const dropdownLink = dropdown.querySelector('.nav-link');
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
 
-            dropdownLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                const isShown = dropdownContent.classList.contains('show');
-                document.querySelectorAll('.dropdown-content.show').forEach(el => {
-                    el.classList.remove('show');
-                });
-                if (!isShown) {
-                    dropdownContent.classList.add('show');
-                    const rect = dropdownLink.getBoundingClientRect();
-                    dropdownContent.style.top = `${rect.bottom + 10}px`;
-                }
+            // ハンバーガーメニューの処理
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
             });
 
+            // 画面の他の部分をクリックした時にメニューを閉じる
             document.addEventListener('click', (e) => {
-                if (!dropdown.contains(e.target)) {
-                    dropdownContent.classList.remove('show');
+                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
                 }
             });
 
+            // スクロール時にメニューを閉じる
             window.addEventListener('scroll', () => {
-                dropdownContent.classList.remove('show');
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
             }, { passive: true });
         });
     </script>

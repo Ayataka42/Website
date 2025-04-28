@@ -16,15 +16,22 @@
     <nav class="nav-container">
         <div class="nav-content">
             <a href="index.html" class="nav-logo">NN</a>
+            <button class="hamburger" aria-label="Menu">
+                <span class="hamburger-icon"></span>
+            </button>
             <div class="nav-menu">
                 <a href="about.html" class="nav-link">About</a>
-                <div class="dropdown">
-                    <a href="#" class="nav-link">Portfolio <i class="fas fa-chevron-down"></i></a>
+                <!-- デスクトップ表示用のドロップダウン -->
+                <div class="dropdown desktop-only">
+                    <a href="#" class="nav-link dropdown-toggle">Portfolio <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-content">
                         <a href="photos.html">Photos</a>
                         <a href="papers.html">Papers</a>
                     </div>
                 </div>
+                <!-- モバイル表示用の直接リンク -->
+                <a href="photos.html" class="nav-link mobile-only">Photos</a>
+                <a href="papers.html" class="nav-link mobile-only">Papers</a>
                 <a href="activities.html" class="nav-link">Activities</a>
                 <a href="services.html" class="nav-link">Services</a>
                 <a href="contact.html" class="nav-link">Contact</a>
@@ -300,46 +307,45 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
             const dropdown = document.querySelector('.dropdown');
             const dropdownContent = document.querySelector('.dropdown-content');
-            const dropdownLink = dropdown.querySelector('.nav-link');
+            const dropdownToggle = document.querySelector('.dropdown-toggle');
 
-            // Handle click/touch events
-            dropdownLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const isShown = dropdownContent.classList.contains('show');
-                
-                // Close any open dropdowns first
-                document.querySelectorAll('.dropdown-content.show').forEach(el => {
-                    el.classList.remove('show');
-                });
-
-                if (!isShown) {
-                    dropdownContent.classList.add('show');
-                    
-                    // Position the dropdown
-                    const rect = dropdownLink.getBoundingClientRect();
-                    dropdownContent.style.top = `${rect.bottom + 10}px`;
-                }
+            // ハンバーガーメニューの処理
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
             });
 
-            // Close dropdown when clicking outside
+            // ドロップダウンメニューの処理（デスクトップ表示用）
+            if (dropdownToggle) {
+                dropdownToggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dropdownContent.classList.toggle('show');
+                });
+            }
+
+            // 画面の他の部分をクリックした時にメニューを閉じる
             document.addEventListener('click', (e) => {
-                if (!dropdown.contains(e.target)) {
+                if (dropdown && !dropdown.contains(e.target)) {
                     dropdownContent.classList.remove('show');
                 }
+                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                }
             });
 
-            // Close dropdown when scrolling
+            // スクロール時にメニューを閉じる
             window.addEventListener('scroll', () => {
-                dropdownContent.classList.remove('show');
-            }, { passive: true });
-
-            // Close dropdown when window is resized
-            window.addEventListener('resize', () => {
-                dropdownContent.classList.remove('show');
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                if (dropdownContent) {
+                    dropdownContent.classList.remove('show');
+                }
             }, { passive: true });
         });
     </script>

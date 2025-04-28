@@ -167,15 +167,22 @@
     <nav class="nav-container">
         <div class="nav-content">
             <a href="index.html" class="nav-logo">NN</a>
+            <button class="hamburger" aria-label="Menu">
+                <span class="hamburger-icon"></span>
+            </button>
             <div class="nav-menu">
                 <a href="about.html" class="nav-link">About</a>
-                <div class="dropdown">
-                    <a href="#" class="nav-link">Portfolio <i class="fas fa-chevron-down"></i></a>
+                <!-- デスクトップ表示用のドロップダウン -->
+                <div class="dropdown desktop-only">
+                    <a href="#" class="nav-link dropdown-toggle">Portfolio <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-content">
                         <a href="photos.html">Photos</a>
                         <a href="papers.html">Papers</a>
                     </div>
                 </div>
+                <!-- モバイル表示用の直接リンク -->
+                <a href="photos.html" class="nav-link mobile-only">Photos</a>
+                <a href="papers.html" class="nav-link mobile-only">Papers</a>
                 <a href="activities.html" class="nav-link">Activities</a>
                 <a href="services.html" class="nav-link">Services</a>
                 <a href="contact.html" class="nav-link">Contact</a>
@@ -253,17 +260,62 @@
 
     <div id="modal" class="modal">
         <span class="close">&times;</span>
-        <button class="modal-nav-button modal-prev" id="prevButton">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="modal-nav-button modal-next" id="nextButton">
-            <i class="fas fa-chevron-right"></i>
-        </button>
         <img class="modal-content" id="modal-img">
+        <button class="modal-nav-button modal-prev"><i class="fas fa-chevron-left"></i></button>
+        <button class="modal-nav-button modal-next"><i class="fas fa-chevron-right"></i></button>
     </div>
 
     <script>
+        // Photo modal functionality
+        let currentPhotoIndex = 0;
+        const photos = document.querySelectorAll('.photo-item img');
+        const modal = document.getElementById('modal');
+        const modalImg = document.getElementById('modal-img');
+        const close = document.querySelector('.close');
+        const prevBtn = document.querySelector('.modal-prev');
+        const nextBtn = document.querySelector('.modal-next');
+
+        photos.forEach((photo, index) => {
+            photo.addEventListener('click', () => {
+                modal.style.display = 'block';
+                modalImg.src = photo.src;
+                currentPhotoIndex = index;
+            });
+        });
+
+        close.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        prevBtn.onclick = function() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+            modalImg.src = photos[currentPhotoIndex].src;
+        }
+
+        nextBtn.onclick = function() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+            modalImg.src = photos[currentPhotoIndex].src;
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // ハンバーガーメニューの処理
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+            
+            // ドロップダウンの処理
             const dropdown = document.querySelector('.dropdown');
             const dropdownContent = document.querySelector('.dropdown-content');
             const dropdownLink = dropdown.querySelector('.nav-link');
@@ -307,6 +359,12 @@
                 if (!dropdown.contains(e.target)) {
                     dropdownContent.classList.remove('show');
                 }
+                
+                // ハンバーガーメニューも閉じる（ハンバーガーとメニュー以外をクリックした場合）
+                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                }
             });
 
             document.addEventListener('touchend', (e) => {
@@ -315,105 +373,12 @@
                 }
             }, { passive: true });
 
-            // スクロール時にドロップダウンを閉じる
+            // スクロール時にドロップダウンとハンバーガーメニューを閉じる
             window.addEventListener('scroll', () => {
                 dropdownContent.classList.remove('show');
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
             }, { passive: true });
-
-            const modal = document.getElementById('modal');
-            const modalImg = document.getElementById('modal-img');
-            const close = document.getElementsByClassName('close')[0];
-            const prevButton = document.getElementById('prevButton');
-            const nextButton = document.getElementById('nextButton');
-            const photos = document.querySelectorAll('.photo-item img');
-            let currentPhotoIndex = 0;
-
-            // 写真を表示する関数
-            function showPhoto(index) {
-                currentPhotoIndex = index;
-                modalImg.src = photos[index].src;
-            }
-
-            // 次の写真を表示
-            function showNextPhoto() {
-                currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
-                showPhoto(currentPhotoIndex);
-            }
-
-            // 前の写真を表示
-            function showPrevPhoto() {
-                currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
-                showPhoto(currentPhotoIndex);
-            }
-
-            // 写真をクリックしたときの処理
-            photos.forEach((photo, index) => {
-                photo.onclick = function() {
-                    modal.style.display = 'block';
-                    showPhoto(index);
-                }
-            });
-
-            // ナビゲーションボタンのクリックイベント
-            nextButton.onclick = (e) => {
-                e.stopPropagation();
-                showNextPhoto();
-            };
-
-            prevButton.onclick = (e) => {
-                e.stopPropagation();
-                showPrevPhoto();
-            };
-
-            // キーボードナビゲーション
-            document.addEventListener('keydown', (e) => {
-                if (modal.style.display === 'block') {
-                    if (e.key === 'ArrowRight') {
-                        showNextPhoto();
-                    } else if (e.key === 'ArrowLeft') {
-                        showPrevPhoto();
-                    } else if (e.key === 'Escape') {
-                        modal.style.display = 'none';
-                    }
-                }
-            });
-
-            // スワイプナビゲーション
-            let touchStartX = 0;
-            let touchEndX = 0;
-
-            modalImg.addEventListener('touchstart', (e) => {
-                touchStartX = e.touches[0].clientX;
-            }, { passive: true });
-
-            modalImg.addEventListener('touchmove', (e) => {
-                e.preventDefault();
-            }, { passive: false });
-
-            modalImg.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].clientX;
-                const swipeDistance = touchEndX - touchStartX;
-
-                // スワイプの距離が50px以上の場合のみナビゲート
-                if (Math.abs(swipeDistance) > 50) {
-                    if (swipeDistance > 0) {
-                        showPrevPhoto();
-                    } else {
-                        showNextPhoto();
-                    }
-                }
-            }, { passive: true });
-
-            // モーダルを閉じる処理
-            close.onclick = function() {
-                modal.style.display = 'none';
-            }
-
-            modal.onclick = function(event) {
-                if (event.target === modal) {
-                    modal.style.display = 'none';
-                }
-            }
         });
     </script>
 </body>

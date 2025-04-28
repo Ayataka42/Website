@@ -88,6 +88,15 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--accent);
 }
 
+/* モバイル・デスクトップ表示の共通設定 */
+.mobile-only {
+    display: none;
+}
+
+.desktop-only {
+    display: block;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -200,6 +209,7 @@ h1, h2, h3, h4, h5, h6 {
     animation-delay: 2s;
 }
 
+/* ドロップダウンメニューのスタイル（デスクトップ用） */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -233,231 +243,138 @@ h1, h2, h3, h4, h5, h6 {
     background-color: var(--secondary);
 }
 
-/* Show dropdown on hover for desktop */
+/* デスクトップ表示の設定 (769px以上) */
 @media screen and (min-width: 769px) {
+    /* ドロップダウンをホバーで表示 */
     .dropdown:hover .dropdown-content {
         display: block;
     }
-}
-
-/* Mobile styles */
-@media screen and (max-width: 768px) {
-    .container {
-        padding-top: calc(3.5rem + 20px); /* Slightly reduced for mobile but still ensuring content is visible */
-        padding-left: 1rem;
-        padding-right: 1rem;
-        padding-bottom: 1rem;
-    }
-
-    .nav-menu {
-        gap: 1rem;
-    }
-
-    .nav-link {
-        font-size: 0.9rem;
-    }
-
-    .container {
-        padding: 2rem 1rem;  /* パディングを減らして空白を調整 */
-        position: relative;
-        z-index: 2;
-        overflow-x: hidden;
-    }
-
-    .section {
-        position: relative;
-        z-index: 2;
-    }
-
-    .whisper {
-        opacity: 0.15;
-        display: block !important;  /* 確実に表示されるように */
-        z-index: 1;
-    }
-
-    .whisper i {
-        font-size: 2.5em;  /* アイコンを少し大きく */
-    }
-
-    .whisper:not(.middle-left):not(.middle-right) {
-        display: block !important;
-    }
-
-    .whisper.top-left {
-        top: 15%;
-        left: -5%;
-    }
-
-    .whisper.top-right {
-        top: 15%;
-        right: -5%;
-    }
-
-    .whisper.bottom-left {
-        bottom: 15%;
-        left: -5%;
-    }
-
-    .whisper.bottom-right {
-        bottom: 15%;
-        right: -5%;
-    }
-
-    .whisper.middle-left,
-    .whisper.middle-right {
+    
+    /* ハンバーガーメニューを非表示 */
+    .hamburger {
         display: none;
     }
+}
 
-    .page-title,
-    .content-wrapper,
-    .papers-grid,
-    .photo-grid,
-    .contact-form {
+/* モバイル表示の設定 (768px以下) */
+@media screen and (max-width: 768px) {
+    /* モバイル表示・非表示の設定 */
+    .mobile-only {
+        display: block;
+    }
+    
+    .desktop-only {
+        display: none;
+    }
+    
+    /* ハンバーガーメニューボタンの設定 */
+    .hamburger {
+        display: block;
+        z-index: 101;
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+    
+    .hamburger-icon {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        background-color: var(--light);
         position: relative;
-        z-index: 2;
+        transition: all 0.3s ease-in-out;
+    }
+    
+    .hamburger-icon::before,
+    .hamburger-icon::after {
+        content: '';
+        position: absolute;
+        width: 25px;
+        height: 3px;
+        background-color: var(--light);
+        transition: all 0.3s ease-in-out;
+    }
+    
+    .hamburger-icon::before {
+        transform: translateY(-8px);
+    }
+    
+    .hamburger-icon::after {
+        transform: translateY(8px);
+    }
+    
+    .hamburger.active .hamburger-icon {
+        background: transparent;
+    }
+    
+    .hamburger.active .hamburger-icon::before {
+        transform: rotate(45deg);
+    }
+    
+    .hamburger.active .hamburger-icon::after {
+        transform: rotate(-45deg);
     }
 
-    .dropdown {
-        position: relative;
-        -webkit-tap-highlight-color: transparent;
-    }
-
-    .dropdown-content {
+    /* ナビゲーションメニューのモバイル表示設定 */
+    .nav-menu {
         position: fixed;
-        background-color: var(--primary);
-        min-width: 160px;
-        border-radius: 8px;
-        padding: 0.8rem 0;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        border: 1px solid rgba(249, 238, 220, 0.15);
-        top: auto;  /* Remove absolute positioning */
-        left: 50%;
-        transform: translateX(-50%);
-        -webkit-transform: translateX(-50%);
-        z-index: 1002;  /* Ensure it's above the nav-container */
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-        -webkit-transition: opacity 0.3s ease, visibility 0.3s ease;
+        top: -100%; /* 初期状態では画面外（上）に配置 */
+        left: 0;
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        background-color: rgba(43, 58, 103, 0.95);
+        backdrop-filter: blur(10px);
+        text-align: center;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.25);
+        z-index: 100;
+        padding: 20px 0;
     }
 
-    .dropdown-content.show {
-        display: block;
-        opacity: 1;
-        visibility: visible;
+    .nav-menu.active {
+        top: 0; /* 小さい画面でもページの最上部から表示 */
     }
-
-    .dropdown-content a {
-        color: var(--light);
-        padding: 1rem 1.5rem;
-        text-decoration: none;
-        display: block;
+    
+    .nav-menu a.nav-link {
+        margin: 16px 0;
         font-size: 1.1rem;
-        -webkit-tap-highlight-color: transparent;
-        transition: background-color 0.3s ease;
-        -webkit-transition: background-color 0.3s ease;
-    }
-
-    .dropdown-content a:active {
-        background-color: var(--secondary);
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(-10px) translateX(-50%);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0) translateX(-50%);
-        }
-    }
-
-    /* Safari用のアニメーション */
-    @-webkit-keyframes fadeIn {
-        from {
-            opacity: 0;
-            -webkit-transform: translateY(-10px) translateX(-50%);
-        }
-        to {
-            opacity: 1;
-            -webkit-transform: translateY(0) translateX(-50%);
-        }
-    }
-
-    .dropdown:hover .dropdown-content,
-    .dropdown:focus .dropdown-content,
-    .dropdown:active .dropdown-content {
+        padding: 8px 0;
         display: block;
     }
 }
 
+/* 小さい画面サイズの追加設定 (480px以下) */
 @media screen and (max-width: 480px) {
     .container {
-        padding-top: calc(3rem + 20px); /* Further reduced for smaller screens */
+        padding: 1.5rem 0.8rem;
+        padding-top: 4rem;
     }
 
     .nav-container {
-        padding: 0.3rem 0;
+        padding: 0.5rem 0;
     }
 
     .nav-content {
-        flex-direction: row;  /* 横並びに変更 */
-        justify-content: space-between;
-        align-items: center;
         padding: 0.5rem 1rem;
-        gap: 1rem;
-    }
-
-    .nav-menu {
-        flex-direction: row;  /* 横並びに変更 */
-        flex-wrap: nowrap;    /* 改行を防止 */
-        justify-content: flex-end;
-        gap: 0.5rem;         /* ギャップを少し縮小 */
-        width: auto;         /* 幅を自動に */
-        overflow-x: auto;    /* 横スクロール可能に */
-        -webkit-overflow-scrolling: touch;  /* スムーズスクロール */
-        scrollbar-width: none;  /* スクロールバーを隠す */
-        padding-bottom: 3px;    /* スクロールバーのスペース */
-    }
-
-    .nav-menu::-webkit-scrollbar {
-        display: none;       /* Chromeでスクロールバーを隠す */
     }
 
     .nav-logo {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
-
+    
+    /* モバイルメニューの設定を維持 */
+    .nav-menu.active {
+        top: 0; /* 小さい画面でもページの最上部から表示 */
+    }
+    
     .nav-link {
-        font-size: 0.85rem;
-        padding: 0.2rem 0.4rem;
-    }
-
-    .dropdown-content {
-        position: fixed;  /* absolute から fixed に変更 */
-        width: 180px;
-        min-width: unset;
-        margin-top: 0.5rem;
-        left: 50%;
-        transform: translateX(-50%);
-        -webkit-transform: translateX(-50%);  /* Safari用 */
-        -webkit-backface-visibility: hidden;  /* Safari用 */
-        backface-visibility: hidden;          /* 標準プロパティ */
-        -webkit-tap-highlight-color: transparent;  /* タップ時のハイライトを無効化 */
-    }
-
-    .dropdown-content a {
-        padding: 0.7rem 1.2rem;
         font-size: 1rem;
-        -webkit-tap-highlight-color: transparent;  /* タップ時のハイライトを無効化 */
     }
 
-    .container {
-        padding: 1.5rem 0.8rem;
-        padding-top: 4rem;  /* ナビゲーションバーの高さが減ったので調整 */
-    }
-
+    /* Whisperの設定を調整 */
     .whisper {
         opacity: 0.12;
     }
@@ -466,31 +383,23 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 2em;
     }
 
-    .whisper.top-left {
-        top: 20%;
-        left: -8%;
-    }
-
-    .whisper.top-right {
-        top: 20%;
-        right: -8%;
-    }
-
-    .whisper.bottom-left {
-        bottom: 20%;
-        left: -8%;
-    }
-
+    .whisper.top-left,
+    .whisper.top-right,
+    .whisper.bottom-left,
     .whisper.bottom-right {
-        bottom: 20%;
-        right: -8%;
+        display: none; /* 小さい画面では非表示 */
     }
 }
 
 .page-title {
     text-align: center;
     margin-bottom: 2rem;
-    margin-top: 1rem;  /* Added margin-top for better spacing */
+    margin-top: 1rem;
     position: relative;
     z-index: 1;
+}
+
+/* ドロップダウン表示のJavaScriptサポート用クラス */
+.show {
+    display: block !important;
 }
