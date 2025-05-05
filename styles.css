@@ -56,9 +56,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-menu {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
+    position: fixed;
+    top: -100%; /* 初期状態では画面外（上）に配置 */
+    left: 0;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    background-color: rgba(43, 58, 103, 0.95);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 10px 27px rgba(0, 0, 0, 0.25);
+    z-index: 100;
+    padding: 20px 0;
+    opacity: 0; /* 初期状態では透明 */
+    visibility: hidden; /* 初期状態では非表示 */
+}
+
+.nav-menu.active {
+    top: 0; /* アクティブ時は画面最上部に表示 */
+    opacity: 1; /* アクティブ時は不透明に */
+    visibility: visible; /* アクティブ時は表示 */
 }
 
 .nav-link {
@@ -254,6 +272,20 @@ h1, h2, h3, h4, h5, h6 {
     .hamburger {
         display: none;
     }
+    
+    /* デスクトップ表示でのナビゲーションメニューの設定 */
+    .nav-menu {
+        position: static;
+        display: flex;
+        flex-direction: row;
+        background-color: transparent;
+        width: auto;
+        box-shadow: none;
+        opacity: 1;
+        visibility: visible;
+        padding: 0;
+        gap: 2rem;
+    }
 }
 
 /* モバイル表示の設定 (768px以下) */
@@ -332,10 +364,14 @@ h1, h2, h3, h4, h5, h6 {
         box-shadow: 0 10px 27px rgba(0, 0, 0, 0.25);
         z-index: 100;
         padding: 20px 0;
+        opacity: 0; /* 初期状態では透明 */
+        visibility: hidden; /* 初期状態では非表示 */
     }
 
     .nav-menu.active {
-        top: 0; /* 小さい画面でもページの最上部から表示 */
+        top: 0; /* アクティブ時は画面最上部に表示 */
+        opacity: 1; /* アクティブ時は不透明に */
+        visibility: visible; /* アクティブ時は表示 */
     }
     
     .nav-menu a.nav-link {

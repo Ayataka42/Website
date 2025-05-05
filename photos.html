@@ -177,12 +177,12 @@
                     <a href="#" class="nav-link dropdown-toggle">Portfolio <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-content">
                         <a href="photos.html">Photos</a>
-                        <a href="papers.html">Papers</a>
+                        <a href="papers.html">Papers & Projects</a>
                     </div>
                 </div>
                 <!-- モバイル表示用の直接リンク -->
                 <a href="photos.html" class="nav-link mobile-only">Photos</a>
-                <a href="papers.html" class="nav-link mobile-only">Papers</a>
+                <a href="papers.html" class="nav-link mobile-only">Papers & Projects</a>
                 <a href="activities.html" class="nav-link">Activities</a>
                 <a href="services.html" class="nav-link">Services</a>
                 <a href="contact.html" class="nav-link">Contact</a>
@@ -206,6 +206,40 @@
         <div class="page-introduction">
             <p>My journey began with the school yearbook, where I discovered the power of capturing life's moments in a single frame. I specialize in street photography, documenting the beauty in everyday scenes, while also covering events for sports and organizations like my school's robotics club.</p>
             <p>Open to exploring new styles, particularly portrait photography. If my work interests you, feel free to <a href="contact.html" class="text-link">reach out</a>.</p>
+        </div>
+
+        <!-- 受賞歴セクションの追加 -->
+        <div class="awards-section">
+            <h2 class="awards-title">Recognition & Awards</h2>
+            
+            <div class="awards-container">
+                <div class="award-card">
+                    <div class="award-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="award-content">
+                        <h3 class="award-name">Washington State High School Photo Contest 2024</h3>
+                        <p class="award-description">Selected for People Category (Top 10%)</p>
+                        <div class="award-details">
+                            <p>This prestigious statewide competition features over 1,000 entries per category from schools across Washington. Selection represents the top 10% in each category and is judged by professional photographers in the community.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="award-card">
+                    <div class="award-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <div class="award-content">
+                        <h3 class="award-name">Photocrowd Achievements</h3>
+                        <p class="award-description">4th Place & Two Judge Commendations</p>
+                        <div class="award-details">
+                            <p>Photocrowd is an international photography platform with over 100,000 active users hosting frequent competitions. I've achieved 4th place in a contest and received prestigious judge commendations on two separate entries.</p>
+                            <a href="https://www.photocrowd.com/photographer-community/503670/awards/?utm_source=sendinblue&utm_campaign=801a_Achievements_bronze_-_Photo_loves&utm_medium=email" target="_blank" class="profile-link"><i class="fas fa-external-link-alt"></i> View My Photocrowd Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <style>
@@ -235,6 +269,109 @@
 
             .text-link:hover {
                 color: var(--accent-2);
+            }
+
+            .awards-section {
+                max-width: 1000px;
+                margin: 0 auto 4rem;
+                padding: 0 1.5rem;
+            }
+            
+            .awards-title {
+                text-align: center;
+                font-size: 2rem;
+                margin-bottom: 2.5rem;
+                color: var(--light);
+                position: relative;
+                display: inline-block;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .awards-title::after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 0;
+                width: 100%;
+                height: 3px;
+                background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            }
+            
+            .awards-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+            }
+            
+            .award-card {
+                background-color: rgba(73, 106, 129, 0.1);
+                border-radius: 12px;
+                border: 1px solid rgba(249, 238, 220, 0.1);
+                padding: 1.5rem;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: flex-start;
+                gap: 1.5rem;
+            }
+            
+            .award-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                background-color: rgba(73, 106, 129, 0.2);
+            }
+            
+            .award-icon {
+                font-size: 2rem;
+                color: var(--accent);
+                flex-shrink: 0;
+                margin-top: 0.5rem;
+            }
+            
+            .award-name {
+                font-size: 1.3rem;
+                margin-bottom: 0.5rem;
+                color: var(--light);
+            }
+            
+            .award-description {
+                font-weight: 500;
+                color: var(--accent);
+                margin-bottom: 1rem;
+                font-size: 1.1rem;
+            }
+            
+            .award-details p {
+                color: var(--light);
+                opacity: 0.9;
+                line-height: 1.6;
+                font-size: 0.95rem;
+            }
+
+            .profile-link {
+                display: inline-block;
+                margin-top: 1rem;
+                color: var(--accent);
+                text-decoration: none;
+                font-size: 0.95rem;
+                transition: color 0.3s ease;
+            }
+
+            .profile-link:hover {
+                color: var(--accent-2);
+            }
+            
+            @media screen and (max-width: 768px) {
+                .award-card {
+                    flex-direction: column;
+                    align-items: center;
+                    text-align: center;
+                    gap: 1rem;
+                }
+                
+                .award-icon {
+                    margin-top: 0;
+                }
             }
         </style>
 

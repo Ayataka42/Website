@@ -26,12 +26,12 @@
                     <a href="#" class="nav-link dropdown-toggle">Portfolio <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-content">
                         <a href="photos.html">Photos</a>
-                        <a href="papers.html">Papers</a>
+                        <a href="papers.html">Papers & Projects</a>
                     </div>
                 </div>
                 <!-- モバイル表示用の直接リンク -->
                 <a href="photos.html" class="nav-link mobile-only">Photos</a>
-                <a href="papers.html" class="nav-link mobile-only">Papers</a>
+                <a href="papers.html" class="nav-link mobile-only">Papers & Projects</a>
                 <a href="activities.html" class="nav-link">Activities</a>
                 <a href="services.html" class="nav-link">Services</a>
                 <a href="contact.html" class="nav-link">Contact</a>
@@ -55,38 +55,59 @@
 
         <div class="preview-section">
             <div class="preview-grid">
-                <div class="preview-card">
-                    <img src="robotics/NGN_0120.jpg" alt="About Preview" class="preview-image">
-                    <div class="preview-content">
-                        <h3 class="preview-title">About Me</h3>
-                        <p class="preview-description">IB Diploma Candidate at Inglemoor High School, pursuing both academic excellence and creative endeavors while maintaining a 4.0 GPA.</p>
-                        <a href="about.html" class="preview-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                <a href="about.html" class="preview-card-link">
+                    <div class="preview-card">
+                        <img src="robotics/NGN_0120.jpg" alt="About Preview" class="preview-image">
+                        <div class="preview-content">
+                            <h3 class="preview-title">About Me</h3>
+                            <p class="preview-description">IB Diploma Candidate at Inglemoor High School, pursuing both academic excellence and creative endeavors while maintaining a 4.0 GPA.</p>
+                            <span class="preview-link">Learn More <i class="fas fa-arrow-right"></i></span>
+                        </div>
                     </div>
-                </div>
-                <div class="preview-card">
-                    <img src="photo/NGN_6148.jpg" alt="Photography Preview" class="preview-image">
-                    <div class="preview-content">
-                        <h3 class="preview-title">Photography</h3>
-                        <p class="preview-description">Capturing life's moments through street and event photography, documenting the beauty in everyday scenes.</p>
-                        <a href="photos.html" class="preview-link">View Gallery <i class="fas fa-camera"></i></a>
+                </a>
+                
+                <a href="photos.html" class="preview-card-link">
+                    <div class="preview-card">
+                        <img src="photo/NGN_6148.jpg" alt="Photography Preview" class="preview-image">
+                        <div class="preview-content">
+                            <h3 class="preview-title">Photography</h3>
+                            <p class="preview-description">Capturing life's moments through street and event photography, documenting the beauty in everyday scenes.</p>
+                            <span class="preview-link">View Gallery <i class="fas fa-camera"></i></span>
+                        </div>
                     </div>
-                </div>
-                <div class="preview-card">
-                    <img src="paper/Math IA Cover Page.png" alt="Papers Preview" class="preview-image">
-                    <div class="preview-content">
-                        <h3 class="preview-title">Research Papers</h3>
-                        <p class="preview-description">Mathematical investigations and research projects exploring daily life phenomena.</p>
-                        <a href="papers.html" class="preview-link">Read Papers <i class="fas fa-book"></i></a>
+                </a>
+                
+                <a href="papers.html" class="preview-card-link">
+                    <div class="preview-card">
+                        <img src="paper/Math IA Cover Page.png" alt="Papers Preview" class="preview-image">
+                        <div class="preview-content">
+                            <h3 class="preview-title">Papers & Projects</h3>
+                            <p class="preview-description">Academic research papers and coding projects, including a Java recipe app I developed for my mom as a Computer Science final project.</p>
+                            <span class="preview-link">View Work <i class="fas fa-code"></i></span>
+                        </div>
                     </div>
-                </div>
-                <div class="preview-card">
-                    <img src="robotics/NGN_0258.jpg" alt="Activities Preview" class="preview-image">
-                    <div class="preview-content">
-                        <h3 class="preview-title">Activities</h3>
-                        <p class="preview-description">From robotics and game development (including "Starburst" in Unity) to competitive cubing and teaching, explore my diverse interests and projects.</p>
-                        <a href="activities.html" class="preview-link">See Activities <i class="fas fa-cube"></i></a>
+                </a>
+                
+                <a href="activities.html" class="preview-card-link">
+                    <div class="preview-card">
+                        <img src="robotics/NGN_0258.jpg" alt="Activities Preview" class="preview-image">
+                        <div class="preview-content">
+                            <h3 class="preview-title">Activities</h3>
+                            <p class="preview-description">From robotics and game development to competitive cubing and teaching, explore my diverse interests and projects.</p>
+                            <span class="preview-link">See Activities <i class="fas fa-cube"></i></span>
+                        </div>
                     </div>
-                </div>
+                </a>
+                
+                <a href="services.html" class="preview-card-link">
+                    <div class="preview-card no-image">
+                        <div class="preview-content">
+                            <h3 class="preview-title">Tutoring Services</h3>
+                            <p class="preview-description">Offering personalized tutoring in Japanese language, mathematics, and Rubik's cube solving techniques for students of all ages.</p>
+                            <span class="preview-link">Learn About Services <i class="fas fa-chalkboard-teacher"></i></span>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
@@ -142,6 +163,13 @@
         .preview-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .preview-card.no-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 250px;
         }
 
         .preview-image {
@@ -347,6 +375,19 @@
                     dropdownContent.classList.remove('show');
                 }
             }, { passive: true });
+            
+            // 画面サイズ変更時にメニューを閉じる
+            window.addEventListener('resize', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                if (dropdownContent) {
+                    dropdownContent.classList.remove('show');
+                }
+            });
+            
+            // ページ読み込み時にも一度実行してメニューを閉じておく
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
         });
     </script>
 </body>
